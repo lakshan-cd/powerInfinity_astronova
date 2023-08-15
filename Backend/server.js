@@ -16,10 +16,8 @@ app.use(express.json());
 
 mongoose.set("strictQuery", true);
 
-
 app.use("/api/user", userRouter);
 app.use("/api/planet", planetRouter);
-
 
 mongoose
   .connect(process.env.MONGO_URI)

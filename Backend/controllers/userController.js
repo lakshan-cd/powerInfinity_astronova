@@ -3,16 +3,35 @@ const createToken = require("../utils/createToken");
 const createError = require("../utils/createError");
 
 const signup = async (req, res) => {
-  const { Name, email, contactNumber, password } = req.body;
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+    contactNumber,
+    postalCode,
+    DOB,
+  } = req.body;
   try {
-    const user = await User.signup(Name, email, password, contactNumber);
+    const user = await User.signup(
+      firstName,
+      lastName,
+      email,
+      password,
+      contactNumber,
+      postalCode,
+      DOB
+    );
     const token = createToken(user._id);
 
     res.status(200).json({
-      Name,
+      firstName,
+      lastName,
       email,
-      contactNumber,
       password,
+      contactNumber,
+      postalCode,
+      DOB,
       _id: user._id,
     });
   } catch (error) {

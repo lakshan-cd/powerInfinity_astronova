@@ -4,32 +4,60 @@ const validator = require("validator");
 const Schema = mongoose.Schema;
 const createError = require("../utils/createError");
 
-const userSchema = new Schema({
-  Name: {
-    type: String,
-    required: true,
+const userSchema = new Schema(
+  {
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    contactNumber: {
+      type: String,
+      required: true,
+    },
+    postalCode: {
+      type: String,
+      required: true,
+    },
+    DOB: {
+      type: Date,
+      required: true,
+    },
   },
-  email: {
-    type: String,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  contactNumber: {
-    type: String,
-    required: true,
-  },
-});
+  { timestamps: true }
+);
+
 userSchema.statics.signup = async function (
-  Name,
+  firstName,
+  lastName,
   email,
   password,
-  contactNumber
+  contactNumber,
+  postalCode,
+  DOB
 ) {
-  if (!Name || !email || !password || !contactNumber) {
-    return createError(400, "All fields must be provided");
+  if (
+    !firstName ||
+    !lastName ||
+    !email ||
+    !password ||
+    !contactNumber ||
+    !postalCode ||
+    !DOB
+  ) {
+    console.log("plase");
+    throw Error("All fields must be provided");
   }
   if (!validator.isEmail(email)) {
     return createError(400, "Email not valid");
@@ -47,10 +75,13 @@ userSchema.statics.signup = async function (
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
   const user = await this.create({
-    Name,
+    firstName,
+    lastName,
     email,
     password: hash,
     contactNumber,
+    postalCode,
+    DOB,
   });
 
   return user;
