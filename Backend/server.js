@@ -8,13 +8,18 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 const userRouter = require("./routers/userRoute");
+const planetRouter = require("./routers/planetRoute");
 // express app
 app.use(cors());
 // middleware
 app.use(express.json());
 
 mongoose.set("strictQuery", true);
+
+
 app.use("/api/user", userRouter);
+app.use("/api/planet", planetRouter);
+
 
 mongoose
   .connect(process.env.MONGO_URI)

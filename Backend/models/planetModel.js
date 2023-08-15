@@ -12,7 +12,7 @@ const planetSchema = new Schema({
         required: true
     },
     lengthOfYear: {
-        type: String,
+        type: Number,
         required: true
     }
 })
