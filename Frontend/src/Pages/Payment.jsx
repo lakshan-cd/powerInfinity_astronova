@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Container, Paper, TextField, Button, Grid } from "@mui/material";
+import { Link } from "react-router-dom";
 import NavBar from "../Components/NavBar";
 
 const Payment = () => {
@@ -18,34 +20,36 @@ const Payment = () => {
     setCvv(event.target.value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    
-    console.log("Payment submitted:", cardNumber, expiryDate, cvv);
+  const handleConfirm = () => {
+    // Handle the payment confirmation logic here
+    console.log("Payment confirmed:", cardNumber, expiryDate, cvv);
   };
 
   return (
     <div>
-      <NavBar />
-
-      <form onSubmit={handleSubmit}>
-        <label>
-          Card Number:
-          <input type="text" value={cardNumber} onChange={handleCardNumberChange} />
-        </label>
-        <br />
-        <label>
-          Expiry Date:
-          <input type="text" value={expiryDate} onChange={handleExpiryDateChange} />
-        </label>
-        <br />
-        <label>
-          CVV:
-          <input type="text" value={cvv} onChange={handleCvvChange} />
-        </label>
-        <br />
-        <button type="submit">Pay Now</button>
-      </form>
+       <NavBar />
+       
+    <Container maxWidth="sm" sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+      <Paper elevation={3} sx={{ padding: 3, width: "100%" }}>
+        <form>
+          <TextField label="Card Number" fullWidth value={cardNumber} onChange={handleCardNumberChange} margin="normal" />
+          <TextField label="Expiry Date" fullWidth value={expiryDate} onChange={handleExpiryDateChange} margin="normal" />
+          <TextField label="CVV" fullWidth value={cvv} onChange={handleCvvChange} margin="normal" />
+          <Grid container spacing={2} justifyContent="center" marginTop={2}>
+            <Grid item>
+              <Button variant="contained" color="primary" onClick={handleConfirm}>
+                Confirm
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button variant="contained" component={Link} to="/">
+                Back
+              </Button>
+            </Grid>
+          </Grid>
+        </form>
+      </Paper>
+    </Container>
     </div>
   );
 };
