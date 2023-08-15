@@ -1,9 +1,6 @@
 const User = require("../models/usersModel");
-const express = require("express");
-const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 const createToken = require("../utils/createToken");
+const createError = require("../utils/createError");
 
 const signup = async (req, res) => {
   const { Name, email, contactNumber, password } = req.body;
