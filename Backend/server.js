@@ -9,7 +9,8 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 const userRouter = require("./routers/userRoute");
 const planetRouter = require("./routers/planetRoute");
-const tripRouter= require("./routers/tripRoute");
+const tripRouter = require("./routers/tripRoute");
+const BookingRouter = require("./routers/BookingRoute");
 // express app
 app.use(cors());
 // middleware
@@ -20,7 +21,7 @@ mongoose.set("strictQuery", true);
 app.use("/api/user", userRouter);
 app.use("/api/planet", planetRouter);
 app.use("/api/trip", tripRouter);
-
+app.use("/api/booking", BookingRouter);
 
 mongoose
   .connect(process.env.MONGO_URI)

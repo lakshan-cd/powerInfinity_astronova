@@ -34,6 +34,17 @@ const userSchema = new Schema(
       type: Date,
       required: true,
     },
+    tokens: [
+      {
+        token: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
+    verifytoken: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
@@ -108,6 +119,36 @@ userSchema.statics.login = async function (email, password) {
     throw createError(400, "Password must be at least 6 characters long");
   }
 
+  return user;
+};
+
+userSchema.statics.forget = async function (email) {
+  if (!email) {
+    throw createError("Email must be filled");
+  }
+
+  if (!validator.isEmail(email)) {
+    throw createError("Email not valid");
+  }
+  const user = await this.findOne({ email });
+  if (!user) {
+    throw createError("Incorrect email");
+  }
+  console.log(user);
+  return user;
+};
+
+userSchema.statics.reset = async function (password) {
+  if (!password) {
+    throw createError("password is required");
+  }
+
+  if (!validator.isStrongPassword(password)) {
+    throw createError("Password not strong enough");
+  }
+
+  const salt = await bcrypt.genSalt(12);
+  const hash = await bcrypt.hash(password, salt);
   return user;
 };
 module.exports = mongoose.model("User", userSchema);
