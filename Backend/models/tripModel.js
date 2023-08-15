@@ -23,6 +23,10 @@ const tripSchema = new Schema({
         type: Date,
         required: true
     },
+    price: {
+        type: Number,
+        required: true
+    },
     from: {
         type:Schema.Types.ObjectId,
         ref: 'Planet'
