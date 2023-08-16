@@ -4,6 +4,8 @@ import Home from "./Pages/Home";
 import Login from "./Pages/login/Login";
 
 import Signup from "./Pages/Signup";
+import BookingForm from "./Components/Booking/BookingForm";
+
 function App() {
   return (
     <BrowserRouter>
@@ -11,6 +13,8 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route path="/signin" element={<Login/>}/>
         <Route path="/Signup" element={<Signup />} />
+        <Route path="/addreservation" element={<BookingForm />} />
+
       </Routes>
     </BrowserRouter>
   );

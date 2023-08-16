@@ -10,6 +10,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
 import { StyledAdd, SearchIconWrapper } from "./Style";
 import AppBar from "@mui/material/AppBar";
+import { Link } from "react-router-dom";
+
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: "10%",
@@ -84,7 +86,9 @@ export default function SearchAppBar() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
+            <Link to = "/addreservation">
             Book Now
+            </Link>
           </Typography>
           <Typography
             variant="h6"
