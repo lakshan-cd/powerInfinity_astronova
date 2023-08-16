@@ -1,52 +1,51 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
-import { FormControl, TextField, Typography } from "@mui/material";
-import { Namefield, Input } from "./Style";
-import Signup from "./../Pages/Signup";
+import { FormControl } from "@mui/material";
+import { Namefield, Input, MainGrid, InputText } from "./Style";
 import Box from "@mui/material/Box";
 const SignUpData = () => {
   return (
     <div>
-      <Grid>
+      <MainGrid>
         <FormControl>
-          <Typography>Name</Typography>
+          <InputText>Name</InputText>
 
           <Namefield>
             <Box>
-              <Typography>First Name</Typography>
               <Input />
+              <InputText>First Name</InputText>
             </Box>
             <Box>
-              <Typography>Last Name</Typography>
               <Input />
+              <InputText>Last Name</InputText>
             </Box>
           </Namefield>
 
-          <Typography>Email</Typography>
+          <InputText>Email</InputText>
           <Input />
-          <Typography>ContactNumber</Typography>
+          <InputText>ContactNumber</InputText>
           <Input />
 
           <Namefield>
             <Box>
-              <Typography>City</Typography>
+              <InputText>City</InputText>
               <Input />
             </Box>
             <Box>
-              <Typography>Postal Code</Typography>
+              <InputText>Postal Code</InputText>
               <Input />
             </Box>
           </Namefield>
-          <Typography>State</Typography>
+          <InputText>State</InputText>
           <Input />
-          <Typography>Country</Typography>
+          <InputText>Country</InputText>
           <Input />
-          <Typography>Password</Typography>
+          <InputText>Password</InputText>
           <Input />
-          <Typography>Confirm Password</Typography>
+          <InputText>Confirm Password</InputText>
           <Input />
         </FormControl>
-      </Grid>
+      </MainGrid>
     </div>
   );
 };
