@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { styled, alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -10,6 +10,18 @@ import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
 import { StyledAdd, SearchIconWrapper } from "./Style";
 import AppBar from "@mui/material/AppBar";
+import { Link } from "react-router-dom"; 
+
+const StyledTypography = styled(Typography)(({ theme }) => ({
+  flexGrow: 1,
+  display: { xs: "none", sm: "block" },
+  margin: theme.spacing(0, 0), // Add margin to the Typography
+  color: theme.palette.common.white, // Set the color to white
+  textDecoration: "none", // Remove default text decoration
+  "&:hover": {
+    color: theme.palette.primary.main, // Change color on hover
+  },
+}));
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -71,15 +83,21 @@ export default function SearchAppBar() {
           >
             <MenuIcon />
           </IconButton>
+          
+
+          <Link to="/">
           <Typography
             variant="h6"
             noWrap
-            component="div"
+            component={StyledTypography}
+
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
             Home
           </Typography>
-          
+          </Link>
+
+
           <Typography
             variant="h6"
             noWrap
