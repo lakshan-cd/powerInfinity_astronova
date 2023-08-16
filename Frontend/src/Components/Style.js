@@ -126,11 +126,7 @@ const SignUpButton = styled(Button)(({ theme }) => ({
   },
   border: "1px solid #CC9200",
 }));
-const MainGridSignUP = styled(Grid)(({ theme }) => ({
-  backgroundImage: "url(your-image-url.jpg)",
-  backgroundSize: "cover",
-  backgroundRepeat: "no-repeat",
-}));
+
 export {
   StyledAdd,
   SearchIconWrapper,
@@ -144,5 +140,4 @@ export {
   VoiceIcon,
   ButtonBox,
   SignUpButton,
-  MainGridSignUP,
 };

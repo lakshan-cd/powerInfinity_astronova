@@ -8,15 +8,14 @@ import {
   VoiceIcon,
   ButtonBox,
   SignUpButton,
-  MainGridSignUP,
 } from "../Components/Style";
 import { Typography } from "@mui/material";
 const Signup = () => {
   return (
     <div>
-      <MainGridSignUP container spacing={2} sx={{}}>
+      <Grid container spacing={2} sx={{}}>
         <Grid item xs={6}>
-          Google signup
+          <img src="images/Logo.png" />
         </Grid>
 
         <Grid item xs={6}>
@@ -32,7 +31,7 @@ const Signup = () => {
             <SignUpButton>Sign Up</SignUpButton>
           </ButtonBox>
         </Grid>
-      </MainGridSignUP>
+      </Grid>
     </div>
   );
 };
