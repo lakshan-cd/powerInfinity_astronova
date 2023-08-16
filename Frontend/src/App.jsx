@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home";
+import Signup from "./Pages/Signup";
 import BookingForm from "./Components/Booking/BookingForm";
 
 function App() {
@@ -8,8 +9,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<Home />} />
+        <Route path="/Signup" element={<Signup />} />
         <Route path="/addreservation" element={<BookingForm />} />
-
       </Routes>
     </BrowserRouter>
   );
