@@ -10,7 +10,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
 import { StyledAdd, SearchIconWrapper } from "./Style";
 import AppBar from "@mui/material/AppBar";
-
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: "10%",
