@@ -86,9 +86,7 @@ export default function SearchAppBar() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            <Link to = "/addreservation">
-            Book Now
-            </Link>
+            <Link to="/addreservation">Book Now</Link>
           </Typography>
           <Typography
             variant="h6"
