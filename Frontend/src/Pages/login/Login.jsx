@@ -1,6 +1,6 @@
 import { Box, Button, Container, CssBaseline, Grid, Typography, colors,  } from '@mui/material'
 import React from 'react'
-import { heading,main,grid2,grid1,boxmain,formbox,textfield,loginbutton,text,headingBox } from './loginstyle'
+import { heading,main,grid2,grid1,boxmain,formbox,textfield,loginbutton,text,headingBox,textLeft,textCenter } from './loginstyle'
 import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
 import TextField from '@mui/material/TextField';
 import LoginFaceId from '../../Components/LoginFaceId';
@@ -23,6 +23,9 @@ const theme = createTheme()
                   <Box sx={headingBox}>
                <Typography  sx={heading}>Sign In</Typography>
                </Box>
+               <Typography sx={{marginTop:"20px"}}>
+                Click here to fill by voice 
+               </Typography>
 
                <Box component='form' sx={formbox}>
                 <Typography sx={text}>Username/Email</Typography>
@@ -43,6 +46,7 @@ const theme = createTheme()
                color="secondary"
                sx={textfield}
                 />
+                <Typography  sx={textLeft}>Forgot Password?</Typography>
                 <Box  >
                   <Box sx={headingBox}>
                   <Button
@@ -53,6 +57,9 @@ const theme = createTheme()
                   Sign In
                 </Button>
                   </Box>
+                  <Typography sx={textCenter}>
+                    New to website? Sign Up
+                  </Typography>
                 
                 </Box>
                </Box>

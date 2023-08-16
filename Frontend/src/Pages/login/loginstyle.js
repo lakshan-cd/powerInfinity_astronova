@@ -1,6 +1,6 @@
 
 const heading ={
-    fontSize: 50,
+    fontSize: '50px',
     Type: "center",
     marginTop:'50px',
     
@@ -18,15 +18,30 @@ const headingBox= {
 }
 
 const text ={
-    display: { 
-        xs: "flex", 
-        md: "flex" ,
-        alignItems: "flex-start",
-        
-    },
-marginLeft:"0px",
+ 
 marginTop:"20px"   
 }
+const textCenter ={
+  display: { 
+      xs: "flex", 
+      md: "flex" ,
+      alignItems: "center",
+      justifyContent:"center"
+      
+  },
+  color:"#CC9200",
+marginTop:"40px"   
+}
+const textLeft ={
+  display: { 
+      xs: "flex", 
+      md: "flex" ,
+      alignItems: "flex-end",
+      justifyContent:"flex-end"
+  },
+marginTop:"30px"   
+}
+
 const main ={
     height:'100vh',
     color:"white",
@@ -42,16 +57,20 @@ const grid1 = {
   
 }
 const grid2 = {
-  display: "flex",
-    flexDirection:"column",
+  
+  // display: "flex",
+  //   flexDirection:"column",
 
 }
 
 const boxmain = {
+  display: { 
+    sm: "flex", 
+    md: "flex" ,
+    alignItems: "center",
+},
   marginTop:'100px',
-    display: "flex",
     flexDirection:"column",
-      alignItems: "center",
       justifyContent:"center"
       
 }
@@ -67,7 +86,7 @@ const textfield = {
 
     minWidth:{sm:"200px",md:"500px"},
     opacity:"0.7",
-    // padding: theme.spacing(0, 0),
+    // padding: [theme.spacing(0, 0),
   marginRight: "10px",
   marginTop: "10px",
   borderRadius: 10,
@@ -113,4 +132,4 @@ const buttondiv={
 
 
 
-export {heading,main,text,grid2,grid1,boxmain,formbox,textfield,loginbutton,headingBox}
+export {heading,main,text,grid2,grid1,boxmain,formbox,textfield,loginbutton,headingBox,textLeft,textCenter}
