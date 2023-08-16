@@ -3,6 +3,7 @@ import React from 'react'
 import { heading,main,grid2,grid1,boxmain,formbox,textfield,loginbutton,text,headingBox } from './loginstyle'
 import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
 import TextField from '@mui/material/TextField';
+import LoginFaceId from '../../Components/LoginFaceId';
 
 const theme = createTheme()
 
@@ -14,9 +15,7 @@ const theme = createTheme()
             <Grid container component="main" sx={main}>
                 <CssBaseline/>
                <Grid item md={6} sx={grid1} >
-                <Box sx={{alignItems:"center"}}>
-                
-                </Box>
+                <LoginFaceId/>
                
                </Grid>
                <Grid item md={6} sm={12} sx={grid2}>

@@ -1,4 +1,4 @@
-import background from '../../assets/images/background.png'
+
 const heading ={
     fontSize: 50,
     Type: "center",
@@ -30,22 +30,29 @@ marginTop:"20px"
 const main ={
     height:'100vh',
     color:"white",
-    background:"black"
+    backgroundImage: 'url(images/back.png)',
+    backgroundSize:'cover',
+  backgroundRepeat: 'no-repeat',
+  backgroundAttachment: 'fixed',
+    
     
 }
 
 const grid1 = {
-   
+  
 }
 const grid2 = {
-    
+  display: "flex",
+    flexDirection:"column",
+
 }
 
 const boxmain = {
-    
+  marginTop:'100px',
     display: "flex",
     flexDirection:"column",
       alignItems: "center",
+      justifyContent:"center"
       
 }
 
@@ -59,7 +66,7 @@ const formbox ={
 const textfield = {
 
     minWidth:{sm:"200px",md:"500px"},
-    opacity:"0.6",
+    opacity:"0.7",
     // padding: theme.spacing(0, 0),
   marginRight: "10px",
   marginTop: "10px",
@@ -67,7 +74,7 @@ const textfield = {
   backgroundColor: "#F7F1F1",
   height: "50px",
   "&:hover": {
-    height: "40px",
+    height: "50px",
     "& fieldset": {
       borderColor: "transparent", // Change the border color on hover
     },
@@ -86,7 +93,7 @@ const textfield = {
 }
 const loginbutton ={
     
-    marginTop: "40px",
+    marginTop: "60px",
     minWidth:"200px",
     backgroundColor:"#CC9200", 
     "&:hover": {
