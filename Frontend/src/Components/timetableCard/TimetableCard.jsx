@@ -1,17 +1,11 @@
 import React from "react";
-
-const TimetableCard = ({ name }) => {
+import "./timetableCard.css";
+const TimetableCard = ({ data }) => {
   return (
-    <div
-      style={{
-        color: "black",
-        backgroundColor: "white",
-        height: "180px",
-        width: "140px",
-        borderRadius: "5px",
-        margin: "10px",
-      }}>
-      {name}
+    <div className="timetable-card">
+      from : {data.from.name} <br />
+      to: {data.to.name} <br />
+      mode: {data.mode}
     </div>
   );
 };

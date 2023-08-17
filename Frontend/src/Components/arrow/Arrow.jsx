@@ -8,9 +8,9 @@ const Arrow = ({ pointer }) => {
     <div>
       <div className="timetableArrows" >
         {pointer == "<" ? (
-          <AiOutlineLeft size={30} />
+          <AiOutlineLeft size={20} />
         ) : (
-          <AiOutlineRight size={30} />
+          <AiOutlineRight size={20} />
         )}
       </div>
     </div>

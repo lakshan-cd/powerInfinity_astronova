@@ -1,17 +1,44 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import NavBar from "../../Components/NavBar";
 import "./tripSchedule.css";
 // import "react-calendar/dist/Calendar.css";
 import { useState } from "react";
 import Calendar from "react-calendar";
-import TimetableCard from "../../Components/timetableCard/TimetableCard";
+import TimetableTitleCard from "../../Components/timetableTitleCard/TimetableTitleCard";
 import Carousel, { consts } from "react-elastic-carousel";
 import Arrow from "../../Components/arrow/Arrow";
-
-
+import axios from "axios";
 
 const TripSchedule = () => {
+  const carouselRef = useRef(null);
   const [date, setDate] = useState(null);
+  const [timetableData, setTimetableData] = useState([]);
+  useEffect(() => {
+    const getTimetableDetails = async () => {
+      await axios
+        .get("http://localhost:4000/api/trip/getAllTrips")
+        .then((res) => {
+          console.log("tt", res.data);
+          setTimetableData(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
+    getTimetableDetails();
+  }, []);
+
+  useEffect(() => {
+    const refMap = {};
+    timetableData.forEach((data, index) => {
+      refMap[data._id] = index;
+    });
+    if (carouselRef.current) {
+      carouselRef.current.refMap = refMap;
+    }
+    scrollToItem("2023-08-12");
+  }, [timetableData]);
 
   const breakPoints = [
     {
@@ -36,23 +63,23 @@ const TripSchedule = () => {
     console.log(date);
     setDate(date);
   };
+  const myArrow = ({ type, onClick, isEdge }) => {
+    const pointer = type === consts.PREV ? "<" : ">";
+    return (
+      <div onClick={onClick} disabled={isEdge}>
+        <Arrow pointer={pointer} />
+      </div>
+    );
+  };
 
-
-
-
-
-const myArrow = ({ type, onClick, isEdge }) => {
-  const pointer = type === consts.PREV ? "<" : ">";
-  return (
-    <div onClick={onClick} disabled={isEdge}>
-      <Arrow pointer={pointer} />
-    </div>
-  );
-};
-
-
-
-
+  const scrollToItem = (_id) => {
+    if (carouselRef.current && carouselRef.current.refMap) {
+      const index = carouselRef.current.refMap[_id];
+      if (index !== undefined) {
+        carouselRef.current.goTo(index);
+      }
+    }
+  };
   return (
     <div>
       <NavBar />
@@ -66,21 +93,25 @@ const myArrow = ({ type, onClick, isEdge }) => {
         </div>
         <div className="timeTableContainer">
           <div className="timeTableText">
-            <h2>Time table</h2>
+            <h2>Timetable</h2>
           </div>
           <div className="timeTableBox">
             <Carousel
+              ref={carouselRef}
               breakPoints={breakPoints}
               pagination={false}
               renderArrow={myArrow}>
-              <TimetableCard name="1" />
-              <TimetableCard name="1" />
-              <TimetableCard name="1" />
-              <TimetableCard name="1" />
-              <TimetableCard name="1" />
-              <TimetableCard name="1" />
-              <TimetableCard name="1" />
+              {timetableData.map((data, index) => {
+                return <TimetableTitleCard data={data} key={index} />;
+              })}
             </Carousel>
+
+            <div
+              onClick={() => {
+                scrollToItem("2023-08-17");
+              }}>
+              ss
+            </div>
           </div>
         </div>
       </div>
