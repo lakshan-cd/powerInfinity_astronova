@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import TripSchedule from "./Pages/TripSchedule";
+import TripSchedule from "./Pages/tripSchedule/TripSchedule";
 import Home from "./Pages/Home";
 import Payment from "./Pages/Payment";
 import Signup from "./Pages/Signup";
@@ -16,7 +16,7 @@ function App() {
         <Route  path="Payment" element={<Payment />} />
         <Route path="/Signup" element={<Signup />} />
         <Route path="/addreservation" element={<BookingForm />} />
-
+        <Route path="/tripSchedule" element={<TripSchedule />} />
       </Routes>
     </BrowserRouter>
   );

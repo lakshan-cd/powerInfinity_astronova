@@ -19,6 +19,14 @@ const Home = () => {
         <button>Go to Payment</button>
       </Link>
 
+      <div class = "pay">
+        <Button/>
+    </div>
+    <Button/>
+      <Link to="/addreservation">
+        <button>booking</button>
+      </Link>
+      <Button/>
     </div>
   );
 };
