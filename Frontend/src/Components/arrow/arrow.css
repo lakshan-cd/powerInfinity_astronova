@@ -1,0 +1,16 @@
+.timetableArrows{
+color:#cc9200 ;
+margin: 8px;
+border-radius: 50%;
+height: 30px;
+width: 30px;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: all ease-in 0.2s ;
+}
+
+.timetableArrows:hover{
+   color:white;  
+   background-color: #cc9200;
+}
