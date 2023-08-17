@@ -72,13 +72,15 @@ const updateTrip = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-
 const getAllTrips = async (req, res) => {
   try {
-    const trips = await Trip.find().populate("from").populate("to");
+    const trips = await Trip.find()
+      .populate("from")
+      .populate("to")
+      .sort({ startDate: 1 }) // Sort by startDate in ascending order
 
     if (!trips) {
-      return res.status(404).json({ error: "trips not found" });
+      return res.status(404).json({ error: "Trips not found" });
     }
 
     return res.json({ trips });
@@ -87,6 +89,10 @@ const getAllTrips = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
+
+
+
 
 const getOneTrip = async (req, res) => {
   const { id } = req.params;
