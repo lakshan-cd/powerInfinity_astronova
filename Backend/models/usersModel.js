@@ -29,19 +29,19 @@ userSchema.statics.signup = async function (
   contactNumber
 ) {
   if (!Name || !email || !password || !contactNumber) {
-    return createError(400, "All fields must be provided");
+    throw createError(400, "All fields must be provided");
   }
   if (!validator.isEmail(email)) {
-    return createError(400, "Email not valid");
+    throw createError(400, "Email not valid");
   }
   if (!validator.isStrongPassword(password)) {
-    return createError(400, "Password not strong enough");
+    throw createError(400, "Password not strong enough");
   }
 
   const exists = await this.findOne({ email });
 
   if (exists) {
-    return createError(409, "Email already in use");
+    throw createError(409, "Email already in use");
   }
 
   const salt = await bcrypt.genSalt(10);
@@ -58,23 +58,23 @@ userSchema.statics.signup = async function (
 
 userSchema.statics.login = async function (email, password) {
   if (!email || !password) {
-    return createError(400, "All fields must be filled");
+    throw createError(400, "All fields must be filled");
   } else if (!password) {
-    return createError(400, "Password must be filled");
+    throw createError(400, "Password must be filled");
   } else if (!email) {
-    return createError(400, "Email must be filled");
+    throw createError(400, "Email must be filled");
   }
   const user = await this.findOne({ email });
   if (!user) {
-    return createError(400, "User not registered");
+    throw createError(400, "User not registered");
   }
 
   const match = await bcrypt.compare(password, user.password);
   if (!match) {
-    return createError(400, "Incorrect password");
+    throw createError(400, "Incorrect password");
   }
   if (password && !validator.isLength(password, { min: 8 })) {
-    return createError(400, "Password must be at least 6 characters long");
+    throw createError(400, "Password must be at least 6 characters long");
   }
 
   return user;

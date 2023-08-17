@@ -8,6 +8,8 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 const userRouter = require("./routers/userRoute");
+const stripeRouter = require("./routers/stripeRoute");
+
 // express app
 app.use(cors());
 // middleware
@@ -15,6 +17,7 @@ app.use(express.json());
 
 mongoose.set("strictQuery", true);
 app.use("/api/user", userRouter);
+app.use("/api/stripe", stripeRouter);
 
 mongoose
   .connect(process.env.MONGO_URI)
