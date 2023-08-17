@@ -16,7 +16,7 @@ const SignUpData = () => {
               <InputText>First Name</InputText>
             </Box>
             <Box>
-              <Input />
+              <Input  />
               <InputText>Last Name</InputText>
             </Box>
           </Namefield>

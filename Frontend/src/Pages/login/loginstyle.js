@@ -19,7 +19,7 @@ const headingBox= {
 
 const text ={
  
-marginTop:"20px"   
+marginTop:"25px"   
 }
 const textCenter ={
   display: { 
@@ -65,6 +65,7 @@ const grid2 = {
 
 const boxmain = {
   display: { 
+    xs:"flex",
     sm: "flex", 
     md: "flex" ,
     alignItems: "center",
@@ -89,11 +90,11 @@ const textfield = {
     // padding: [theme.spacing(0, 0),
   marginRight: "10px",
   marginTop: "10px",
-  borderRadius: 10,
+  borderRadius: 2,
   backgroundColor: "#F7F1F1",
-  height: "50px",
+  height: "55px",
   "&:hover": {
-    height: "50px",
+    height: "55px",
     "& fieldset": {
       borderColor: "transparent", // Change the border color on hover
     },
