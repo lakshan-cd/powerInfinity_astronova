@@ -1,14 +1,15 @@
 const mongoose = require("mongoose");
+const validator = require("validator");
 const Schema = mongoose.Schema;
 
 const bookingSchema = new Schema(
   {
-    //This user ID is then linked to the booking entry in your system. This allows you to associate a booking with a specific user in your application.
+    // userId is an identifier for our customer that booked the ticket
     user_id: {
       type: String,
       required: true,
     },
-    // field contains the ID of the customer who made the payment. It provides by Stripe
+    // field contains the ID of the customer who made the payment. It
     customer_id: {
       type: String,
       required: true,

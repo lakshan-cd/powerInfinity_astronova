@@ -21,7 +21,7 @@ const stripePayment = async (req, res) => {
   const customer = await stripe.customers.create({
     // pass real data from the frontend
     metadata: {
-      userId: "sample id here",
+      userId: "sampath",
       tickets_data: JSON.stringify({
         class: "sample",
         users: 4,
