@@ -12,6 +12,11 @@ import Box from "@mui/material/Box";
 import countrydata from "./countrydata.json";
 import {useFormik} from 'formik'
 import * as Yup from 'yup'
+import axios from "axios";
+import Alert from '@mui/material/Alert'
+import { useNavigate } from "react-router-dom";
+
+
 const SignUpData = () => {
 
   const[country, setCountry]=useState('');
@@ -19,6 +24,9 @@ const SignUpData = () => {
  const[stateName, setStateName]= useState('');
  const[countryError, setCountryError]=useState(false)
  const[stateError,setStateError]=useState(false)
+ const [formError,setFormError] = useState(false)
+ const[errorMessage,setErrorMessage] = useState('')
+ const navigate = useNavigate()
 
  const countryValidation = () =>{
   if(!country){
@@ -67,6 +75,28 @@ const SignUpData = () => {
          return
       }
       console.log(values)
+      axios.post("http://localhost:4000/api/user/signup",{
+    firstName : values.firstname,
+    lastName : values.lastname,
+    email : values.email,
+    password: values.password,
+    contactNumber:values.contactno,
+    postalCode:values.postalcode,
+    country: country,
+    state: stateName,
+      }).then((res)=>{
+        if(res.status == 200){
+          alert("Account created successfully")
+          navigate("/signin")
+
+        }
+        console.log(res)
+      }).catch((err) =>{
+        console.log(err)
+        setErrorMessage(err.response.data.error)
+        setFormError(true)
+        
+      })
     }
   })
 
@@ -149,6 +179,7 @@ console.log(stateName)
                helperText={formik.touched.email ? formik.errors.email :''}
                error={formik.touched.email && Boolean(formik.errors.email)} 
                />
+
           <InputText>ContactNumber</InputText>
           <Input inputProps={{
                style: {
@@ -275,6 +306,7 @@ console.log(stateName)
               }
             />
           </Box>
+          {formError ?  <Alert severity="error">{errorMessage}</Alert> : null}
           <ButtonBox>
             <SignUpButton type="submit">Sign Up</SignUpButton>
           </ButtonBox>

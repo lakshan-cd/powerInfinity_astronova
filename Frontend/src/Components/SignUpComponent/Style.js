@@ -103,7 +103,6 @@ const RightGrid = styled(Grid)(({ theme }) => ({
 }));
 const InputText = styled(Typography)(({ theme }) => ({
   padding: theme.spacing(0, 0),
-  marginBottom: "10px",
   marginTop: "20px",
 }));
 

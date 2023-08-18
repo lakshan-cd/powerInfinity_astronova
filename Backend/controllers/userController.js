@@ -14,8 +14,11 @@ const signup = async (req, res) => {
     password,
     contactNumber,
     postalCode,
+    country,
+    state,
     DOB,
   } = req.body;
+  
   try {
     const user = await User.signup(
       firstName,
@@ -24,8 +27,11 @@ const signup = async (req, res) => {
       password,
       contactNumber,
       postalCode,
+      country,
+      state,
       DOB
     );
+    
     const token = createToken(user._id);
 
     res.status(200).json({
@@ -35,6 +41,8 @@ const signup = async (req, res) => {
       password,
       contactNumber,
       postalCode,
+      country,
+      state,
       DOB,
       _id: user._id,
     });

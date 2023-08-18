@@ -30,9 +30,17 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    country: {
+      type: String,
+      required: true,
+    },
+    state: {
+      type: String,
+      required: true,
+    },
     DOB: {
       type: Date,
-      required: true,
+      // required: true,
     },
     tokens: [
       {
@@ -56,8 +64,11 @@ userSchema.statics.signup = async function (
   password,
   contactNumber,
   postalCode,
+  country,
+  state,
   DOB
 ) {
+  
   if (
     !firstName ||
     !lastName ||
@@ -65,7 +76,9 @@ userSchema.statics.signup = async function (
     !password ||
     !contactNumber ||
     !postalCode ||
-    !DOB
+    !country||
+    !state
+    
   ) {
     console.log("plase");
     throw createError(400, "All fields must be provided");
@@ -92,6 +105,8 @@ userSchema.statics.signup = async function (
     password: hash,
     contactNumber,
     postalCode,
+    country,
+    state,
     DOB,
   });
 

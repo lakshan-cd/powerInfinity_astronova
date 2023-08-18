@@ -1,14 +1,15 @@
-import { Box, Button, Container, CssBaseline, Grid, Typography, colors,  } from '@mui/material'
-import React from 'react'
+import { Box, Button, Container, CssBaseline, Grid, Typography, colors,Alert  } from '@mui/material'
+import React, { useState } from 'react'
 import { heading,main,grid2,grid1,boxmain,formbox,textfield,loginbutton,text,headingBox,textLeft,textCenter } from './loginstyle'
 import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
 import TextField from '@mui/material/TextField';
 import LoginFaceId from '../../Components/LoginFaceId';
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ForgotPassword from '../../Components/LoginComponents/ForgotPassword';
 import SettingsVoiceIcon from "@mui/icons-material/SettingsVoice";
+import axios from 'axios';
 
 const theme = createTheme()
 
@@ -18,6 +19,10 @@ const theme = createTheme()
   const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [formError,setFormError] = useState(false)
+     const[errorMessage,setErrorMessage] = useState('')
+     const navigate = useNavigate()
+
 
   const formik = useFormik({
     initialValues: {
@@ -30,6 +35,23 @@ const theme = createTheme()
     }),
     onSubmit: (values) =>{
       console.log(values)
+   axios.post("http://localhost:4000/api/user/login",{
+    email : values.email,
+    password: values.password,
+      }).then((res)=>{
+        if(res.status == 200){
+          sessionStorage.setItem("logintoken",res.data.token)
+          navigate("/tripSchedule")
+          console.log(res)
+        }
+        console.log(res)
+      }).catch((err) =>{
+        console.log(err)
+        setErrorMessage(err.response.data.error)
+        setFormError(true)
+        
+      })
+    
     },
   })
     
@@ -84,6 +106,7 @@ const theme = createTheme()
                 />
                 <Typography   sx={textLeft}><Link onClick={handleOpen}>Forgot Password?</Link></Typography>
                 <Box  >
+                {formError ?  <Alert severity="error">{errorMessage}</Alert> : null}
                   <Box sx={headingBox}>
                   <Button
                 type='submit'
