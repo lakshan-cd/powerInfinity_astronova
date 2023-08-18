@@ -17,51 +17,67 @@ const TripSchedule = () => {
   const [to, setTo] = useState(null);
   const [mode, setMode] = useState(null);
   const [data, setData] = useState([]);
-  const [fromSortData]=useState([])
+  const [fromSortData] = useState([]);
 
-useEffect(() => {
-  const filterData = () => {
-    if (!data.length == 0) {
-      let filteredData = [...data];
+  useEffect(() => {
+    const filterData = () => {
+      if (!data.length == 0) {
+        let filteredData = [...data];
 
-      if (from != null) {
-        filteredData = filteredData
-          .map((item) => {
-            const moonTrips = item.tripsData.filter(
-              (trip) => trip.from.name === from
-            );
-            if (moonTrips.length > 0) {
-              return {
-                ...item,
-                tripsData: moonTrips,
-              };
-            }
-          })
-          .filter(Boolean);
+        if (from != null) {
+          filteredData = filteredData
+            .map((item) => {
+              const moonTrips = item.tripsData.filter(
+                (trip) => trip.from.name === from
+              );
+              if (moonTrips.length > 0) {
+                return {
+                  ...item,
+                  tripsData: moonTrips,
+                };
+              }
+            })
+            .filter(Boolean);
+        }
+
+        if (to != null) {
+          filteredData = filteredData
+            .map((item) => {
+              const moonTrips = item.tripsData.filter(
+                (trip) => trip.to.name === to
+              );
+              if (moonTrips.length > 0) {
+                return {
+                  ...item,
+                  tripsData: moonTrips,
+                };
+              }
+            })
+            .filter(Boolean);
+        }
+
+        if (mode != null) {
+          filteredData = filteredData
+            .map((item) => {
+              const moonTrips = item.tripsData.filter(
+                (trip) => trip.mode === mode
+              );
+              if (moonTrips.length > 0) {
+                return {
+                  ...item,
+                  tripsData: moonTrips,
+                };
+              }
+            })
+            .filter(Boolean);
+        }
+
+        setTimetableData(filteredData);
       }
+    };
 
-      if (to != null) {
-        filteredData = filteredData
-          .map((item) => {
-            const moonTrips = item.tripsData.filter(
-              (trip) => trip.to.name === to
-            );
-            if (moonTrips.length > 0) {
-              return {
-                ...item,
-                tripsData: moonTrips,
-              };
-            }
-          })
-          .filter(Boolean);
-      }
-
-      setTimetableData(filteredData);
-    }
-  };
-
-  filterData();
-}, [from, to, data]);
+    filterData();
+  }, [from, to, data, mode]);
   useEffect(() => {
     const getTimetableDetails = async () => {
       await axios
@@ -174,6 +190,13 @@ useEffect(() => {
       }
     }
   };
+
+  const clearHandler = () => {
+    setMode(null);
+    setFrom(null);
+    setTo(null);
+}
+
   return (
     <div>
       <NavBar />
@@ -257,7 +280,9 @@ useEffect(() => {
             <div className="optBtn">
               <div>
                 <label className="optBtn-label">Mode :</label>
-                <select className="filter-dropDown">
+                <select
+                  onChange={(e) => setMode(e.target.value)}
+                  className="filter-dropDown">
                   <option
                     value=""
                     disabled
@@ -265,8 +290,8 @@ useEffect(() => {
                     style={{ display: "none" }}>
                     Select a planet
                   </option>
-                  <option className="filter-dropDown-option" value="Moon">
-                    Moon
+                  <option className="filter-dropDown-option" value="aaavxvsvda">
+                    aaavxvsvda
                   </option>
                   <option className="filter-dropDown-option" value="Venus">
                     Venus
@@ -286,6 +311,12 @@ useEffect(() => {
                 </select>
               </div>
             </div>
+
+            {from !== null || to !== null || mode !== null ? (
+              <div className="optBtn">
+                <div className="clearButton" onClick={clearHandler}>Clear</div>
+              </div>
+            ) : null}
           </div>
         </div>
         <div className="timeTableContainer">
@@ -304,8 +335,6 @@ useEffect(() => {
                 );
               })}
             </Carousel>
-
-            
           </div>
         </div>
       </div>
