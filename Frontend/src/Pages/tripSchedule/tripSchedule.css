@@ -235,3 +235,23 @@ button.rec-dot:focus {
     margin-bottom: 5px;
     margin-left: 4px;
 }
+
+.clearButton{
+  margin-top: 10px;
+  background-color: #cc9200;
+  color: rgb(255, 255, 255);
+  font-size: 16px;
+  font-weight: 700;
+  padding: 5px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: ease-out 0.2s;
+}
+
+
+.clearButton:hover{
+  
+background-color: #000000;
+color: #cc9200;
+}
+
