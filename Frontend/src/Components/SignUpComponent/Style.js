@@ -74,6 +74,7 @@ const Input = styled(TextField)(({ theme, isCentered, hasBlueBorder }) => ({
   height: "40px",
   opacity: "0.7",
   textAlign: isCentered ? "center" : "left", // Center the text if isCentered is true
+  
   "&:hover": {
     height: "40px",
     "& fieldset": {
@@ -103,7 +104,7 @@ const RightGrid = styled(Grid)(({ theme }) => ({
 const InputText = styled(Typography)(({ theme }) => ({
   padding: theme.spacing(0, 0),
   marginBottom: "10px",
-  marginTop: "10px",
+  marginTop: "20px",
 }));
 
 const SignUpText = styled(Typography)(({ theme }) => ({
@@ -143,10 +144,10 @@ const VoiceIcon = styled(SettingsVoiceIcon)(({ theme }) => ({
 }));
 const ButtonBox = styled(Box)(({ theme }) => ({
   padding: theme.spacing(0, 1),
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  marginTop: "20px",
+  // display: "flex",
+  // alignItems: "center",
+  // justifyContent: "center",
+  // marginTop: "20px",
   marginBottom: "20px",
   marginLeft: "120px",
 }));

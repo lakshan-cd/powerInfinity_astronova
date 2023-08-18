@@ -14,19 +14,19 @@ const theme = createTheme()
 
 
 
- const Login = () => {
+ const ResetPassword = () => {
   const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
   const formik = useFormik({
     initialValues: {
-      email: "",
       password: "",
+      conformpw:""
     },
     validationSchema:Yup.object({
-      email: Yup.string().email("Email format is not valid").required("Please enter your email"),
-      password: Yup.string().required("Please enter your password")
+      password: Yup.string().required("Please enter your password"),
+      conformpw:Yup.string().oneOf([Yup.ref("password"),null],"passwords do not match").required("Please conform your password"),
     }),
     onSubmit: (values) =>{
       console.log(values)
@@ -38,14 +38,11 @@ const theme = createTheme()
       <ThemeProvider theme={theme}>
             <Grid container component="main" sx={main}>
                 <CssBaseline/>
-               <Grid item md={6} sm={12} xs={12} sx={grid1} >
-                <LoginFaceId/>
                
-               </Grid>
-               <Grid item md={6}  sx={grid2}>
+               <Grid item md={12} sm={12} xs={12} sx={grid2}>
                 <Box sx={boxmain}>
                   <Box sx={headingBox}>
-               <Typography  sx={heading}>Sign In</Typography>
+               <Typography  sx={heading}>Reset Password</Typography>
                </Box>
                <Typography sx={{marginTop:"20px"}}>
                 Click here to fill by voice <SettingsVoiceIcon sx={{color:"#CC9200"}}/>
@@ -55,34 +52,34 @@ const theme = createTheme()
                 e.preventDefault()
                 formik.handleSubmit()
                }}>
-                <Typography sx={text}>Email</Typography>
-               <TextField 
-               id="email" 
-               name="email"
-               type='email'
-               value={formik.values.email}
-               onChange={formik.handleChange}
-               onBlur={formik.handleBlur}
-               helperText={formik.touched.email ? formik.errors.email :''}
-               error={formik.touched.email && Boolean(formik.errors.email)}
-               sx={textfield}
-               />
-               
-               <Typography  sx={text}>Password</Typography>
-              
+                <Typography sx={text}>Password</Typography>
                <TextField 
                id="password" 
                name="password"
                type='password'
-               color="secondary"
                value={formik.values.password}
                onChange={formik.handleChange}
                onBlur={formik.handleBlur}
                helperText={formik.touched.password ? formik.errors.password :''}
                error={formik.touched.password && Boolean(formik.errors.password)}
                sx={textfield}
+               />
+               
+               <Typography  sx={text}>Conform Password</Typography>
+              
+               <TextField 
+               id="conformpw" 
+               name="conformpw"
+               type='password'
+               color="secondary"
+               value={formik.values.conformpw}
+               onChange={formik.handleChange}
+               onBlur={formik.handleBlur}
+               helperText={formik.touched.conformpw ? formik.errors.conformpw :''}
+               error={formik.touched.conformpw && Boolean(formik.errors.conformpw)}
+               sx={textfield}
                 />
-                <Typography   sx={textLeft}><Link onClick={handleOpen}>Forgot Password?</Link></Typography>
+                
                 <Box  >
                   <Box sx={headingBox}>
                   <Button
@@ -90,13 +87,9 @@ const theme = createTheme()
                  variant='contained'
                  sx={loginbutton}
                  >
-                  Sign In
+                  Reset Password
                 </Button>
                   </Box>
-                  <Typography sx={textCenter}>
-                    New to website?  <Link  to='/Signup'>Sign Up</Link> 
-                  </Typography>
-                
                 </Box>
                </Box>
                </Box >
@@ -109,4 +102,4 @@ const theme = createTheme()
     
   )
 }
-export default Login
+export default ResetPassword

@@ -1,3 +1,6 @@
+import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
+
+const theme = createTheme()
 
 const heading ={
     fontSize: '50px',

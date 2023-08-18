@@ -126,8 +126,6 @@ const login = () =>{
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <Button></Button>
             <StyledLogin onClick={login}>Login</StyledLogin>
-            <StyledAdd>Register</StyledAdd>
-            <StyledLogin>Login</StyledLogin>
             <StyledAdd onClick={navigateToSignup}>Register</StyledAdd>
           </Box>
         </Toolbar>

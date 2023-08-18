@@ -20,7 +20,6 @@ import NavBar from "../Components/NavBar";
 const Signup = () => {
   return (
     <div>
-      <NavBar />
       <Grid container spacing={2}>
         <Grid>
           <Box>
@@ -57,9 +56,7 @@ const Signup = () => {
             </VoiceBox>
           </SignUpDataBox>
           <SignUpData />
-          <ButtonBox>
-            <SignUpButton>Sign Up</SignUpButton>
-          </ButtonBox>
+          
         </RightGrid>
       </Grid>
     </div>
