@@ -9,6 +9,10 @@ import BookingForm from "./Components/Booking/BookingForm";
 import ResetPassword from "./Pages/login/ResetPassword";
 import ForgotPassword from "./Components/LoginComponents/ForgotPassword";
 import AboutUs from "./Pages/AboutUs";
+// import BookingForm from "./Pages/Booking/BookingForm";
+// import BookingForm from "./Pages/Booking/BookingForm";
+import MyBookings from "./Pages/MyBookings/MyBookings";
+
 
 function App() {
   return (
@@ -23,6 +27,7 @@ function App() {
 
         <Route path="/tripSchedule" element={<TripSchedule />} />
         <Route path="/AboutUs" element={<AboutUs />} />
+        <Route path="/mybookings" element={<MyBookings />} />
       </Routes>
     </BrowserRouter>
   );

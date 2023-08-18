@@ -108,7 +108,9 @@ const login = () =>{
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
+            <Link to = "/mybookings">
             My Bookings{" "}
+            </Link>
           </Typography>
           <Typography
             variant="h6"
