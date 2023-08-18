@@ -8,9 +8,9 @@ import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
-import { StyledAdd, SearchIconWrapper } from "./Style";
+import { StyledAdd, SearchIconWrapper } from "./SignUpComponent/Style";
 import AppBar from "@mui/material/AppBar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -60,6 +60,16 @@ const StyledLogin = styled(Button)(({ theme }) => ({
 }));
 
 export default function SearchAppBar() {
+
+const navigate = useNavigate()
+const login = () =>{
+  navigate('/signin')
+}
+  const history = useNavigate();
+
+  const navigateToSignup = () => {
+    history("/Signup"); // Navigate to the signup page
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: "black" }}>
@@ -115,8 +125,8 @@ export default function SearchAppBar() {
           </Search>
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <Button></Button>
-            <StyledLogin>Login</StyledLogin>
-            <StyledAdd>Register</StyledAdd>
+            <StyledLogin onClick={login}>Login</StyledLogin>
+            <StyledAdd onClick={navigateToSignup}>Register</StyledAdd>
           </Box>
         </Toolbar>
       </AppBar>
