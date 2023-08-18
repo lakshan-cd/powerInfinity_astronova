@@ -116,7 +116,7 @@ userSchema.statics.login = async function (email, password) {
     throw createError(400, "Incorrect password");
   }
   if (password && !validator.isLength(password, { min: 8 })) {
-    throw createError(400, "Password must be at least 6 characters long");
+    throw createError(400, "Password must be at least 8 characters long");
   }
 
   return user;
