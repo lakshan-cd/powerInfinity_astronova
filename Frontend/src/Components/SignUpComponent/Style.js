@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import SettingsVoiceIcon from "@mui/icons-material/SettingsVoice";
 import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
+import { Link } from "react-router-dom";
 
 const StyledAdd = styled(Button)(({ theme }) => ({
   marginLeft: "30px",
@@ -24,7 +24,19 @@ const StyledAdd = styled(Button)(({ theme }) => ({
     color: "#CC9200",
   },
 }));
+const CustomLink = styled(Link)(({ theme }) => ({
+  marginLeft: "30px",
+  color: "White" /* Normal color */,
+  textDecoration: "none" /* Remove underline by default */,
+  transition: " color 0.3s" /* Smooth transition when the color changes */,
+  "&:hover": {
+    color: "#CC9200" /* Color on hover */,
+  },
 
+  " &:active ": {
+    color: "green" /* Color when the link is clicked */,
+  },
+}));
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: "100%",
@@ -111,6 +123,13 @@ const SignUpText = styled(Typography)(({ theme }) => ({
   fontSize: "40px",
 }));
 
+const Header = styled(Typography)(({ theme }) => ({
+  padding: theme.spacing(0, 5),
+  fontSize: "36px",
+  color: "#CC9200",
+  justifyContent: "center",
+  alignItems: "center",
+}));
 const SignUpBox = styled(Box)(({ theme }) => ({
   padding: theme.spacing(3, 2),
 
@@ -181,7 +200,39 @@ const SignUpDataBox = styled(Box)(({ theme }) => ({
   padding: theme.spacing(0, 0),
   marginLeft: "140px",
 }));
+
+const LeftAbout = styled(Grid)(({ theme }) => ({
+  padding: theme.spacing(0, 0),
+  alignItems: "center",
+  justifyContent: "center",
+  marginTop: "85px",
+  height: "450px",
+  borderRadius: "20px",
+  marginLeft: "20px",
+  width: "650px",
+}));
+
+const RightAbout = styled(Grid)(({ theme }) => ({
+  padding: theme.spacing(0, 0),
+
+  alignItems: "center",
+  justifyContent: "center",
+  backgroundColor: "white",
+  marginTop: "85px",
+  opacity: 0.4,
+  height: "450px",
+  width: "650px",
+  borderRadius: "20px",
+  marginLeft: "30px",
+}));
+
+const AboutContainer = styled(Grid)(({ theme }) => ({
+  display: "flex",
+  marginLeft: "70px",
+}));
 export {
+  Header,
+  AboutContainer,
   StyledAdd,
   SearchIconWrapper,
   Namefield,
@@ -200,4 +251,7 @@ export {
   ORBox,
   RightGrid,
   SelectDrop,
+  CustomLink,
+  LeftAbout,
+  RightAbout,
 };

@@ -8,7 +8,11 @@ import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
-import { StyledAdd, SearchIconWrapper } from "./SignUpComponent/Style";
+import {
+  StyledAdd,
+  SearchIconWrapper,
+  CustomLink,
+} from "./SignUpComponent/Style";
 import AppBar from "@mui/material/AppBar";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -91,7 +95,7 @@ export default function SearchAppBar() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            <Link to="/addreservation">Book Now</Link>
+            <CustomLink to="/addreservation">Book Now</CustomLink>
           </Typography>
           <Typography
             variant="h6"
@@ -107,7 +111,7 @@ export default function SearchAppBar() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            About Us{" "}
+            <CustomLink to="/AboutUs">About Us</CustomLink>
           </Typography>
           <Search>
             <SearchIconWrapper>
