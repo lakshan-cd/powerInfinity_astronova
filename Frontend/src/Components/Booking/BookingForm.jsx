@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SearchAppBar from "../NavBar";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -7,9 +7,9 @@ import Grid from "@mui/material/Grid";
 import { Typography, colors, makeStyles } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
-
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import { useLocation } from "react-router-dom";
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   marginTop: "50PX",
@@ -30,45 +30,49 @@ const FormAroundDiv = styled("div")(({ theme }) => ({
 }));
 
 const BootstrapButton = styled(Button)({
-    boxShadow: 'none',
-    textTransform: 'none',
-    fontSize: 16,
-    padding: '6px 12px',
-    border: '1px solid',
-    lineHeight: 1.5,
-    backgroundColor: '#CC9200',
-    borderColor: '#CC9200',
+  boxShadow: "none",
+  textTransform: "none",
+  fontSize: 16,
+  padding: "6px 12px",
+  border: "1px solid",
+  lineHeight: 1.5,
+  backgroundColor: "#CC9200",
+  borderColor: "#CC9200",
 
-    fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(','),
-    '&:hover': {
-      backgroundColor: 'none',
-      borderColor: '#CC9200',
-      color: "#CC9200",
-      boxShadow: 'none',
-    },
-    '&:active': {
-      boxShadow: 'none',
+  fontFamily: [
+    "-apple-system",
+    "BlinkMacSystemFont",
+    '"Segoe UI"',
+    "Roboto",
+    '"Helvetica Neue"',
+    "Arial",
+    "sans-serif",
+    '"Apple Color Emoji"',
+    '"Segoe UI Emoji"',
+    '"Segoe UI Symbol"',
+  ].join(","),
+  "&:hover": {
+    backgroundColor: "none",
+    borderColor: "#CC9200",
+    color: "#CC9200",
+    boxShadow: "none",
+  },
+  "&:active": {
+    boxShadow: "none",
     //   backgroundColor: '#0062cc',
-      borderColor: '#005cbf',
-    },
-    '&:focus': {
-      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
-    },
-  });
-
+    borderColor: "#005cbf",
+  },
+  "&:focus": {
+    boxShadow: "0 0 0 0.2rem rgba(0,123,255,.5)",
+  },
+});
 
 const BookingForm = () => {
+  const location = useLocation();
+  const queryParams = location.state;
+  useEffect(() => {
+    console.log("data from timetable", queryParams);
+  }, [queryParams]);
   return (
     <div>
       <div>
@@ -209,16 +213,15 @@ const BookingForm = () => {
           </Grid>
         </Grid>
       </FormAroundDiv>
-      <Stack spacing={3} direction="row" >
-      {/* <ColorButton variant="contained">Custom CSS</ColorButton> */}
-      <BootstrapButton variant="" disableRipple>
-        Cancel
-      </BootstrapButton>
-      <BootstrapButton variant="" disableRipple>
-        Next
-      </BootstrapButton>
-    </Stack>
-
+      <Stack spacing={3} direction="row">
+        {/* <ColorButton variant="contained">Custom CSS</ColorButton> */}
+        <BootstrapButton variant="" disableRipple>
+          Cancel
+        </BootstrapButton>
+        <BootstrapButton variant="" disableRipple>
+          Next
+        </BootstrapButton>
+      </Stack>
     </div>
   );
 };
