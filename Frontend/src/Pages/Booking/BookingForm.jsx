@@ -177,9 +177,10 @@ const BookingForm = () => {
               )}
               sx={{
                 backgroundColor: "#fff",
-                borderRadius: 10,
+                borderRadius: 5,
+                
                 borderColor:"transparent",
-                input: { color: "#dddddd", },
+                input: { color: "#000", },
                 "& .MuiAutocomplete-tag": {
                   backgroundColor: "rgba(128, 128, 128, 0.7)",
                   color: "#2c3e50",

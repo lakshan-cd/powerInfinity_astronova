@@ -1,80 +1,4 @@
-import React  , {useState} from "react";
-import { Typography, Card, CardContent, Divider,Button } from "@mui/material";
-import { HeaderContainer ,BootstrapButton} from "./styles";
-import SearchAppBar from "../../Components/NavBar";
-import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import CardMedia from '@mui/material/CardMedia';
-import IconButton from '@mui/material/IconButton';
-import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import SkipNextIcon from '@mui/icons-material/SkipNext';
-import Grid from "@mui/material/Grid";
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-
-
-const bookingsData = [
-  {
-    from : "Earth",
-    to: "Marse",
-    endDate: "2023-08-20",
-    date : "2023-08-21",
-    title: "Booking 1",
-    description: "Description for Booking 1",
-    mode : "Mode 1",
-    departure : "14 : 00 PM",
-    class : "Economy",
-    passengerId : "200056875020"
-  },
-  {
-    from : "Earth",
-    to: "Marse",
-    endDate: "2023-09-01",
-    date : "2023-09-21",
-    title: "Booking 1",
-    description: "Description for Booking 1",
-    mode : "Mode 1",
-    departure : "14 : 00 PM",
-    class : "Economy",
-    passengerId : "200056875020"
-  },
-  // ... other booking objects
-];
-
-const MyBookings = () => {
-    const theme = useTheme();
-  const today = new Date().toISOString().split("T")[0];
-
-  const sortedBookings = bookingsData.sort((a, b) =>
-    a.date.localeCompare(b.date)
-  );
-
-  //sortBookings(sortedBookings
-  // const sortedBookings = bookingsData.sort((a, b) =>
-  //     a.date.localeCompare(b.date)
-  //   );
-
-
-  const [expandedIndex, setExpandedIndex] = useState(-1);
-
-  const handleToggle = (index) => {
-    if (expandedIndex === index) {
-      setExpandedIndex(-1);
-    } else {
-      setExpandedIndex(index);
-    }
-  };
-
-  return (
-    <div>
-      <SearchAppBar />
-      <HeaderContainer>
-        <Typography variant="h4">My Bookings</Typography>
-      </HeaderContainer>
-
-    
-      <div>      
-      {sortedBookings.map((booking, index) => (
+ {sortedBookings.map((booking, index) => (
         <div key={index}>
           <Typography
             variant="h6"
@@ -115,10 +39,7 @@ const MyBookings = () => {
               marginLeft: "50px",
               marginRight: "50px",
               backgroundColor: "rgba(128, 128, 128, 0.4)",
-              color: "white",
-              overflow: "hidden", // Hide content that exceeds the max height
-              transition: "max-height 0.3s ease-in-out", // Add transition
-              maxHeight: expandedIndex === index ? "1000px" : "0", // Control max height
+              color: "white"
             }}
              >
               <Box sx={{ display: "flex", flexDirection: "column", flex: 1 }}>
@@ -250,11 +171,3 @@ const MyBookings = () => {
            
         </div>
       ))}
-    </div>
-
-    
-    </div>
-  );
-};
-
-export default MyBookings;
