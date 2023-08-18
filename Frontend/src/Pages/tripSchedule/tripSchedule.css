@@ -12,7 +12,7 @@
 }
 .filterBox {
   margin-inline: 10px;
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, 0.09);
   width: calc(100% - 20px);
   height: calc(100% - 10px);
   position: absolute;
@@ -34,7 +34,7 @@
 
 .timeTableBox {
   margin-inline: 10px;
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, 0.06);
   width: calc(100% - 20px);
   /* height: 1000px; */
   position: absolute;
@@ -191,33 +191,47 @@ button.rec-dot:focus {
 }
 
 .rec.rec-arrow {
-color: #cc9200;
+  color: #cc9200;
 }
 
-.rec-arrow-left :hover{
-color: #1c1c1c !important;
-background-color: #000000;
+.rec-arrow-left :hover {
+  color: #1c1c1c !important;
+  background-color: #000000;
 }
 
 .rec.rec-arrow-left:hover:enabled,
-.rec.rec-arrow-right:hover:enabled{
-    background-color: var(--clr-primary-400);
-    box-shadow: 0 0 1px 3px var(--clr-primary-400);
+.rec.rec-arrow-right:hover:enabled {
+  background-color: var(--clr-primary-400);
+  box-shadow: 0 0 1px 3px var(--clr-primary-400);
 }
 
-/* 
-.rec.rec-arrow:first-child{
-    top: 100px;
-    left: 10px;
+/*    ###################################       */
 
-    position: absolute;
+.filter-dropDown {
+  width: 200px;
+  padding: 7px;
+  background-color: rgba(255, 255, 255, 0);
+  border: 1px solid #cc9200;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.filter-dropDown-option {
+  color: #000000;
+  padding: 5px;
+   font-size: 13pt;
 
 }
 
-.rec.rec-arrow:nth-child(2){
-    top: 100px;
-    right: 10px;
+.optBtn{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
 
-    position: absolute;
-
-} */
+.optBtn-label{
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+    margin-left: 4px;
+}
