@@ -16,8 +16,7 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route path="/signin" element={<Login/>}/>
         <Route path="/Signup" element={<Signup />} />
-        <Route path="/forgotpassword" element={<ForgotPassword/>}/>
-        <Route path="/resetpassword" element={<ResetPassword/>} />
+        <Route path="/resetpassword/:token" element={<ResetPassword/>} />
         <Route path="/addreservation" element={<BookingForm />} />
 
         <Route path="/tripSchedule" element={<TripSchedule />} />

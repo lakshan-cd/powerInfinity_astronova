@@ -69,6 +69,9 @@ const transporter = nodemailer.createTransport({
     user: "powerinfinitypow@gmail.com",
     pass: "wrxlpjxjagamugdb",
   },
+  tls: {
+    rejectUnauthorized: false
+  }
 });
 
 const SendEmail = async (req, res) => {
@@ -90,10 +93,10 @@ const SendEmail = async (req, res) => {
       const mailOptions = {
         from: "powerinfinitypow@gmail.com",
         to: email,
-        subject: "Sending Email for verification",
-        text: `This link send Hasthiya IT software project management system 
+        subject: " Email for verification",
+        text: `Please Use following link to reset your astronova account password 
         Change your account password(valid for 2 minutes)
-         http://localhost:3000/forgotPassword/${userfind.id}/${setusertoken.verifytoken}`,
+         http://localhost:5173/resetpassword/${setusertoken.verifytoken}`,
       };
       transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
@@ -108,7 +111,8 @@ const SendEmail = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    console.log(error)
+    res.status(400).json({ message: error.status });
   }
 };
 

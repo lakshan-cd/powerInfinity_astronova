@@ -60,6 +60,7 @@ const grid1 = {
   
 }
 const grid2 = {
+  // backgroundColor:"white",
   
   // display: "flex",
   //   flexDirection:"column",
@@ -73,6 +74,7 @@ const boxmain = {
     md: "flex" ,
     alignItems: "center",
 },
+opacity:"1",
   marginTop:'100px',
     flexDirection:"column",
       justifyContent:"center"
