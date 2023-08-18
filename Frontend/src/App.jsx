@@ -5,12 +5,12 @@ import Login from "./Pages/login/Login";
 
 import TripSchedule from "./Pages/tripSchedule/TripSchedule";
 import Signup from "./Pages/Signup";
-import BookingForm from "./Components/Booking/BookingForm";
+// import BookingForm from "./Components/Booking/BookingForm";
 import ResetPassword from "./Pages/login/ResetPassword";
 import ForgotPassword from "./Components/LoginComponents/ForgotPassword";
 import AboutUs from "./Pages/AboutUs";
 // import BookingForm from "./Pages/Booking/BookingForm";
-// import BookingForm from "./Pages/Booking/BookingForm";
+import BookingForm from "./Pages/Booking/BookingForm";
 import MyBookings from "./Pages/MyBookings/MyBookings";
 
 
