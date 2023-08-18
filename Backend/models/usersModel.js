@@ -30,9 +30,17 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    country: {
+      type: String,
+      required: true,
+    },
+    state: {
+      type: String,
+      required: true,
+    },
     DOB: {
       type: Date,
-      required: true,
+      // required: true,
     },
     tokens: [
       {
@@ -56,8 +64,11 @@ userSchema.statics.signup = async function (
   password,
   contactNumber,
   postalCode,
+  country,
+  state,
   DOB
 ) {
+  
   if (
     !firstName ||
     !lastName ||
@@ -65,7 +76,9 @@ userSchema.statics.signup = async function (
     !password ||
     !contactNumber ||
     !postalCode ||
-    !DOB
+    !country||
+    !state
+    
   ) {
     console.log("plase");
     throw createError(400, "All fields must be provided");
@@ -92,6 +105,8 @@ userSchema.statics.signup = async function (
     password: hash,
     contactNumber,
     postalCode,
+    country,
+    state,
     DOB,
   });
 
@@ -116,7 +131,7 @@ userSchema.statics.login = async function (email, password) {
     throw createError(400, "Incorrect password");
   }
   if (password && !validator.isLength(password, { min: 8 })) {
-    throw createError(400, "Password must be at least 6 characters long");
+    throw createError(400, "Password must be at least 8 characters long");
   }
 
   return user;
