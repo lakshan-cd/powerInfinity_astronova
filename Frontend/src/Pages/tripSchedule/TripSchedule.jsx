@@ -195,7 +195,7 @@ const TripSchedule = () => {
     setMode(null);
     setFrom(null);
     setTo(null);
-}
+  };
 
   return (
     <div>
@@ -212,31 +212,31 @@ const TripSchedule = () => {
                 <label className="optBtn-label">From :</label>
                 <select
                   className="filter-dropDown"
-                  onChange={(e) => setFrom(e.target.value)}>
-                  <option
-                    value=""
-                    disabled
-                    selected
-                    style={{ display: "none" }}>
+                  onChange={(e) => setFrom(e.target.value)}
+                  value={from !== null ? from : ""}>
+                  <option value="" disabled style={{ display: "none" }}>
                     Select a planet
-                  </option>
-                  <option className="filter-dropDown-option" value="Moon">
-                    Moon
-                  </option>
-                  <option className="filter-dropDown-option" value="Venus">
-                    Venus
-                  </option>
-                  <option className="filter-dropDown-option" value="mars">
-                    mars
-                  </option>
-                  <option className="filter-dropDown-option" value="Saturn">
-                    Saturn
                   </option>
                   <option className="filter-dropDown-option" value="Mercury">
                     Mercury
                   </option>
-                  <option className="filter-dropDown-option" value="Neptune">
-                    Neptune
+                  <option className="filter-dropDown-option" value="Venus">
+                    Venus
+                  </option>
+                  <option className="filter-dropDown-option" value="Earth">
+                    Earth
+                  </option>
+                  <option className="filter-dropDown-option" value="Mars">
+                    Mars
+                  </option>
+                  <option className="filter-dropDown-option" value="Jupiter">
+                    Jupiter
+                  </option>
+                  <option className="filter-dropDown-option" value="Saturn">
+                    Saturn
+                  </option>
+                  <option className="filter-dropDown-option" value="Uranus">
+                    Uranus
                   </option>
                 </select>
               </div>
@@ -247,19 +247,22 @@ const TripSchedule = () => {
                 <label className="optBtn-label">To :</label>
                 <select
                   onChange={(e) => setTo(e.target.value)}
-                  className="filter-dropDown">
-                  <option
-                    value=""
-                    disabled
-                    selected
-                    style={{ display: "none" }}>
+                  className="filter-dropDown"
+                  value={to !== null ? to : ""}>
+                  <option value="" disabled style={{ display: "none" }}>
                     Select a planet
                   </option>
-                  <option className="filter-dropDown-option" value="Mars">
-                    Mars
+                  <option className="filter-dropDown-option" value="Mercury">
+                    Mercury
                   </option>
                   <option className="filter-dropDown-option" value="Venus">
                     Venus
+                  </option>
+                  <option className="filter-dropDown-option" value="Earth">
+                    Earth
+                  </option>
+                  <option className="filter-dropDown-option" value="Mars">
+                    Mars
                   </option>
                   <option className="filter-dropDown-option" value="Jupiter">
                     Jupiter
@@ -267,11 +270,8 @@ const TripSchedule = () => {
                   <option className="filter-dropDown-option" value="Saturn">
                     Saturn
                   </option>
-                  <option className="filter-dropDown-option" value="Moon">
-                    Moon
-                  </option>
-                  <option className="filter-dropDown-option" value="Neptune">
-                    Neptune
+                  <option className="filter-dropDown-option" value="Uranus">
+                    Uranus
                   </option>
                 </select>
               </div>
@@ -282,31 +282,21 @@ const TripSchedule = () => {
                 <label className="optBtn-label">Mode :</label>
                 <select
                   onChange={(e) => setMode(e.target.value)}
-                  className="filter-dropDown">
+                  className="filter-dropDown"
+                  value={mode !== null ? mode : ""}>
+                  <option value="" disabled style={{ display: "none" }}>
+                    Select a Mode
+                  </option>
                   <option
-                    value=""
-                    disabled
-                    selected
-                    style={{ display: "none" }}>
-                    Select a planet
+                    className="filter-dropDown-option"
+                    value="galactic-4.0">
+                    galactic-4.0
                   </option>
-                  <option className="filter-dropDown-option" value="aaavxvsvda">
-                    aaavxvsvda
+                  <option className="filter-dropDown-option" value="StarShip-4">
+                    StarShip-4
                   </option>
-                  <option className="filter-dropDown-option" value="Venus">
-                    Venus
-                  </option>
-                  <option className="filter-dropDown-option" value="Jupiter">
-                    Jupiter
-                  </option>
-                  <option className="filter-dropDown-option" value="Saturn">
-                    Saturn
-                  </option>
-                  <option className="filter-dropDown-option" value="Mercury">
-                    Mercury
-                  </option>
-                  <option className="filter-dropDown-option" value="Neptune">
-                    Neptune
+                  <option className="filter-dropDown-option" value="Falcon 15">
+                    Falcon 15
                   </option>
                 </select>
               </div>
@@ -314,7 +304,9 @@ const TripSchedule = () => {
 
             {from !== null || to !== null || mode !== null ? (
               <div className="optBtn">
-                <div className="clearButton" onClick={clearHandler}>Clear</div>
+                <div className="clearButton" onClick={clearHandler}>
+                  Clear
+                </div>
               </div>
             ) : null}
           </div>

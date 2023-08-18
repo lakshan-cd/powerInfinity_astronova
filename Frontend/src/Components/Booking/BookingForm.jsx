@@ -1,58 +1,90 @@
-import React, { useState } from "react";
-import SearchAppBar from "../../Components/NavBar";
+import React, { useEffect } from "react";
+import SearchAppBar from "../NavBar";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { Typography, colors, makeStyles } from "@mui/material";
-import Autocomplete from "@mui/material/Autocomplete";
-import Stack from "@mui/material/Stack";
-import {
-  SearchIconWrapper,
-  BootstrapButton,
-  FormAroundDiv,
-  FormInPut,
-  DivAroundPrice,
-} from "./styles";
-import ProgressBar from "./ProgressBar";
-import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-// import Box from '@mui/material/Box';
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import SettingsVoiceIcon from "@mui/icons-material/SettingsVoice";
+import Autocomplete from "@mui/material/Autocomplete";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import { useLocation } from "react-router-dom";
+
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  marginTop: "50PX",
+  paddingLeft: "50px",
+}));
+
+const FormAroundDiv = styled("div")(({ theme }) => ({
+  marginTop: "50PX",
+  marginLeft: "50px",
+  padding: "50px",
+  width: "80%",
+  // backgroundColor : "#ececec",
+  justifyContent: "center",
+  alignItems: "center",
+  color: "#fff",
+  backgroundColor: "rgba(128, 128, 128, 0.4)", // Gray color with 50% opacity
+  borderRadius: "20px",
+}));
+
+const BootstrapButton = styled(Button)({
+  boxShadow: "none",
+  textTransform: "none",
+  fontSize: 16,
+  padding: "6px 12px",
+  border: "1px solid",
+  lineHeight: 1.5,
+  backgroundColor: "#CC9200",
+  borderColor: "#CC9200",
+
+  fontFamily: [
+    "-apple-system",
+    "BlinkMacSystemFont",
+    '"Segoe UI"',
+    "Roboto",
+    '"Helvetica Neue"',
+    "Arial",
+    "sans-serif",
+    '"Apple Color Emoji"',
+    '"Segoe UI Emoji"',
+    '"Segoe UI Symbol"',
+  ].join(","),
+  "&:hover": {
+    backgroundColor: "none",
+    borderColor: "#CC9200",
+    color: "#CC9200",
+    boxShadow: "none",
+  },
+  "&:active": {
+    boxShadow: "none",
+    //   backgroundColor: '#0062cc',
+    borderColor: "#005cbf",
+  },
+  "&:focus": {
+    boxShadow: "0 0 0 0.2rem rgba(0,123,255,.5)",
+  },
+});
 
 const BookingForm = () => {
-  const [currentStep, setCurrentStep] = useState(1);
-
-  const progress = () => {
-    setCurrentStep(currentStep + 1);
-  };
-
-  const [flightClass, setflightCLass] = React.useState("");
-  // const [class, setClass] = useState('');
-
-  const handleChange = (event) => {
-    setflightCLass(event.target.value);
-  };
+  const location = useLocation();
+  const queryParams = location.state;
+  useEffect(() => {
+    console.log("data from timetable", queryParams);
+  }, [queryParams]);
   return (
     <div>
       <div>
         <SearchAppBar />
-      </div>
-      <div>
-        <ProgressBar currentStep={currentStep} />
       </div>
       <SearchIconWrapper>
         <Grid container spacing={1}>
           <Grid item xs={3}>
             <Typography variant="h4">Booking details</Typography>
           </Grid>
-          <Grid item xs={3} sx={{ display: "flex", gap: "20px" }}>
-            <Typography>Click here to fill by voice </Typography>
-            <SettingsVoiceIcon />
+          <Grid item xs={3}>
+            <Typography>Click here to fill by voice</Typography>
           </Grid>
         </Grid>
       </SearchIconWrapper>
@@ -67,10 +99,24 @@ const BookingForm = () => {
           </Grid>
 
           <Grid item xs={7}>
-            <FormInPut id="standard-basic" variant="outlined" disabled />
+            <TextField
+              id="outlined-basic"
+              variant="outlined"
+              //  value="Custom"
+              inputProps={{
+                style: {
+                  width: "350px",
+                },
+              }}
+            />
           </Grid>
           <Grid item xs={5}>
-            <FormInPut id="standard-basic" variant="outlined" disabled />
+            <TextField
+              id="standard-basic"
+              variant="outlined"
+              sx={{ input: { color: "#dddddd", width: "350px" } }}
+              focused
+            />
           </Grid>
           <Grid item xs={7}>
             <Typography>From - Date</Typography>
@@ -79,19 +125,19 @@ const BookingForm = () => {
             <Typography>To - date</Typography>
           </Grid>
           <Grid item xs={7}>
-            <FormInPut
+            <TextField
               id="standard-basic"
               label=""
               variant="outlined"
-              disabled
+              sx={{ input: { color: "#dddddd", width: "350px" } }}
             />
           </Grid>
           <Grid item xs={5}>
-            <FormInPut
+            <TextField
               id="standard-basic"
               label=""
               variant="outlined"
-              disabled
+              sx={{ input: { color: "#dddddd", width: "350px" } }}
             />
           </Grid>
           <Grid item xs={7}>
@@ -101,19 +147,19 @@ const BookingForm = () => {
             <Typography>Departure time</Typography>
           </Grid>
           <Grid item xs={7}>
-            <FormInPut
+            <TextField
               id="standard-basic"
               label=""
               variant="outlined"
-              disabled
+              sx={{ input: { color: "#dddddd", width: "350px" } }}
             />
           </Grid>
           <Grid item xs={5}>
-            <FormInPut
+            <TextField
               id="standard-basic"
               label=""
               variant="outlined"
-              disabled
+              sx={{ input: { color: "#dddddd", width: "350px" } }}
             />
           </Grid>
           <Grid item xs={7}>
@@ -123,40 +169,19 @@ const BookingForm = () => {
             <Typography>Passenger count</Typography>
           </Grid>
           <Grid item xs={7}>
-            {/* <FormInPut
+            <TextField
               id="standard-basic"
               label=""
               variant="outlined"
-              
-            /> */}
-
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label" sx={{ color: "black" }}>
-                Select class
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={flightClass}
-                label="Select class"
-                onChange={handleChange}
-                sx={{
-                  width: "350px",
-                  backgroundColor: "#F7F1F1",
-                  borderRadius: "10px",
-                }}>
-                <MenuItem value={10}>Business Class</MenuItem>
-                <MenuItem value={20}>First Class</MenuItem>
-                <MenuItem value={30}>Economy</MenuItem>
-              </Select>
-            </FormControl>
+              sx={{ input: { color: "#dddddd", width: "350px" } }}
+            />
           </Grid>
           <Grid item xs={5}>
-            <FormInPut
+            <TextField
               id="standard-basic"
               label=""
               variant="outlined"
-              disabled
+              sx={{ input: { color: "#dddddd", width: "350px" } }}
             />
           </Grid>
           <Grid item xs={10}>
@@ -178,58 +203,22 @@ const BookingForm = () => {
                 />
               )}
               sx={{
-                backgroundColor: "#fff",
-                borderRadius: 5,
-
-                borderColor: "transparent",
-                input: { color: "#000" },
+                input: { color: "#dddddd" },
                 "& .MuiAutocomplete-tag": {
-                  backgroundColor: "rgba(128, 128, 128, 0.7)",
-                  color: "#2c3e50",
+                  backgroundColor: "#fff",
+                  color: "#000",
                 },
               }}
             />
           </Grid>
-          <Grid
-            item
-            xs={10}
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              marginTop: "30px",
-            }}>
-            <Typography sx={{ fontSize: "25px" }}>Price</Typography>
-          </Grid>
-          <Grid
-            item
-            xs={10}
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              marginTop: "10px",
-            }}>
-            <DivAroundPrice>
-              <Typography
-                sx={{ fontSize: "25px", color: "#CC9200", fontWeight: "bold" }}>
-                {" "}
-                25000 $
-              </Typography>
-            </DivAroundPrice>
-          </Grid>
         </Grid>
       </FormAroundDiv>
-      <Stack
-        spacing={3}
-        direction="row"
-        justifyContent="flex-end"
-        marginRight={"120px"}
-        marginTop={"30px"}
-        marginBottom={"100px"}>
+      <Stack spacing={3} direction="row">
         {/* <ColorButton variant="contained">Custom CSS</ColorButton> */}
         <BootstrapButton variant="" disableRipple>
           Cancel
         </BootstrapButton>
-        <BootstrapButton variant="" disableRipple onPress={progress}>
+        <BootstrapButton variant="" disableRipple>
           Next
         </BootstrapButton>
       </Stack>
