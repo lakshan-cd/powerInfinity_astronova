@@ -9,7 +9,7 @@ const line_items = [
     price_data: {
       currency: "usd",
       product_data: {
-        name: `Class A Tickets`,
+        name: `FIRST CLASS`,
       },
       unit_amount: price * 100, // shoud multiply by 100
     },
@@ -23,10 +23,9 @@ const stripePayment = async (req, res) => {
     metadata: {
       userId: "sampath",
       tickets_data: JSON.stringify({
-        class: "sample",
+        class: "FIRST CLASS",
         users: 4,
         passenger_ids: ["1", "2", "3"],
-        distance: "120000Km",
       }),
     },
   });
@@ -38,7 +37,7 @@ const stripePayment = async (req, res) => {
     success_url: "http://localhost:5173/",
     cancel_url: "http://localhost:5173/",
   });
-
+  console.log("hiiii");
   res.send({ url: session.url });
 };
 
@@ -50,12 +49,12 @@ const createBooking = async (customer, data) => {
   const ticketsData = JSON.parse(customer.metadata.tickets_data);
 
   const newBooking = await Booking.create({
+    trip_id: "61024f837a311c0015a25f10",
     user_id: customer.metadata.userId,
     customer_id: data.customer,
     passsenger_ids: ticketsData.passenger_ids,
-    distance: ticketsData.distance,
     class: ticketsData.class,
-    total_payment: data.amount_total,
+    total_payment: data.amount_total / 100,
     payment_status: data.payment_status,
     payment_intent: data.payment_intent,
   });
