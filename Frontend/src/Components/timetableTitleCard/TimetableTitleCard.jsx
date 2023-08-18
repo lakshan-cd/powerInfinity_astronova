@@ -2,6 +2,7 @@ import React from "react";
 import TimetableCard from "../timetableCard/TimetableCard";
 
 const TimetableTitleCard = ({ data }) => {
+  
   return (
     <div>
       <div

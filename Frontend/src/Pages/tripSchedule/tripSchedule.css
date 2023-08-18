@@ -12,7 +12,7 @@
 }
 .filterBox {
   margin-inline: 10px;
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, 0.09);
   width: calc(100% - 20px);
   height: calc(100% - 10px);
   position: absolute;
@@ -34,7 +34,7 @@
 
 .timeTableBox {
   margin-inline: 10px;
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, 0.06);
   width: calc(100% - 20px);
   /* height: 1000px; */
   position: absolute;

@@ -13,6 +13,55 @@ const TripSchedule = () => {
   const carouselRef = useRef(null);
   const [date, setDate] = useState(null);
   const [timetableData, setTimetableData] = useState([]);
+  const [from, setFrom] = useState(null);
+  const [to, setTo] = useState(null);
+  const [mode, setMode] = useState(null);
+  const [data, setData] = useState([]);
+  const [fromSortData]=useState([])
+
+useEffect(() => {
+  const filterData = () => {
+    if (!data.length == 0) {
+      let filteredData = [...data];
+
+      if (from != null) {
+        filteredData = filteredData
+          .map((item) => {
+            const moonTrips = item.tripsData.filter(
+              (trip) => trip.from.name === from
+            );
+            if (moonTrips.length > 0) {
+              return {
+                ...item,
+                tripsData: moonTrips,
+              };
+            }
+          })
+          .filter(Boolean);
+      }
+
+      if (to != null) {
+        filteredData = filteredData
+          .map((item) => {
+            const moonTrips = item.tripsData.filter(
+              (trip) => trip.to.name === to
+            );
+            if (moonTrips.length > 0) {
+              return {
+                ...item,
+                tripsData: moonTrips,
+              };
+            }
+          })
+          .filter(Boolean);
+      }
+
+      setTimetableData(filteredData);
+    }
+  };
+
+  filterData();
+}, [from, to, data]);
   useEffect(() => {
     const getTimetableDetails = async () => {
       await axios
@@ -20,16 +69,17 @@ const TripSchedule = () => {
         .then((res) => {
           console.log("tt", res.data);
           setTimetableData(res.data);
+          setData(res.data);
           if (res.data.length != 0) {
             let currentDate = formatDate(new Date());
             for (const item of res.data) {
               if (item._id >= currentDate) {
-                console.log("dd", item._id);
+                console.log("dd", currentDate);
                 scrollToItem(item._id);
 
                 break;
               }
-              console.log(item._id);
+              // console.log(item._id);
             }
           }
         })
@@ -40,7 +90,7 @@ const TripSchedule = () => {
 
     getTimetableDetails();
 
-    console.log(formatDate(new Date()));
+    // console.log(formatDate(new Date()));
   }, []);
 
   function formatDate(dateString) {
@@ -98,7 +148,7 @@ const TripSchedule = () => {
         } else if (item._id > currentDate) {
           alert(
             "There are no trips scheduled for that day. Here are the nearest trips based on your search date"
-          ); 
+          );
           console.log("no document", item._id);
           scrollToItem(item._id);
           break;
@@ -137,7 +187,9 @@ const TripSchedule = () => {
             <div className="optBtn">
               <div>
                 <label className="optBtn-label">From :</label>
-                <select className="filter-dropDown">
+                <select
+                  className="filter-dropDown"
+                  onChange={(e) => setFrom(e.target.value)}>
                   <option
                     value=""
                     disabled
@@ -145,14 +197,14 @@ const TripSchedule = () => {
                     style={{ display: "none" }}>
                     Select a planet
                   </option>
-                  <option className="filter-dropDown-option" value="Mars">
-                    Mars
+                  <option className="filter-dropDown-option" value="Moon">
+                    Moon
                   </option>
                   <option className="filter-dropDown-option" value="Venus">
                     Venus
                   </option>
-                  <option className="filter-dropDown-option" value="Jupiter">
-                    Jupiter
+                  <option className="filter-dropDown-option" value="mars">
+                    mars
                   </option>
                   <option className="filter-dropDown-option" value="Saturn">
                     Saturn
@@ -170,7 +222,9 @@ const TripSchedule = () => {
             <div className="optBtn">
               <div>
                 <label className="optBtn-label">To :</label>
-                <select className="filter-dropDown">
+                <select
+                  onChange={(e) => setTo(e.target.value)}
+                  className="filter-dropDown">
                   <option
                     value=""
                     disabled
@@ -190,8 +244,8 @@ const TripSchedule = () => {
                   <option className="filter-dropDown-option" value="Saturn">
                     Saturn
                   </option>
-                  <option className="filter-dropDown-option" value="Mercury">
-                    Mercury
+                  <option className="filter-dropDown-option" value="Moon">
+                    Moon
                   </option>
                   <option className="filter-dropDown-option" value="Neptune">
                     Neptune
@@ -211,8 +265,8 @@ const TripSchedule = () => {
                     style={{ display: "none" }}>
                     Select a planet
                   </option>
-                  <option className="filter-dropDown-option" value="Mars">
-                    Mars
+                  <option className="filter-dropDown-option" value="Moon">
+                    Moon
                   </option>
                   <option className="filter-dropDown-option" value="Venus">
                     Venus
@@ -245,16 +299,13 @@ const TripSchedule = () => {
               pagination={false}
               renderArrow={myArrow}>
               {timetableData.map((data, index) => {
-                return <TimetableTitleCard data={data} key={index} />;
+                return (
+                  <TimetableTitleCard data={data} key={index} from={from} />
+                );
               })}
             </Carousel>
 
-            <div
-              onClick={() => {
-                scrollToItem("2023-08-17");
-              }}>
-              ss
-            </div>
+            
           </div>
         </div>
       </div>
