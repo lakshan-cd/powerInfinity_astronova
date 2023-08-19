@@ -85,7 +85,7 @@ export default function SearchAppBar() {
           </IconButton>
           
 
-          <Link to="/">
+          
           <Typography
             variant="h6"
             noWrap
@@ -95,7 +95,7 @@ export default function SearchAppBar() {
           >
             Home
           </Typography>
-          </Link>
+          
 
 
           <Typography
