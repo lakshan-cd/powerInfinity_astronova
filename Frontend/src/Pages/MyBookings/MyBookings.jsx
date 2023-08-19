@@ -30,7 +30,7 @@ const bookingsData = [
     from : "Earth",
     to: "Marse",
     endDate: "2023-09-01",
-    date : "2023-09-21",
+    date : "2023-08-19",
     title: "Booking 1",
     description: "Description for Booking 1",
     mode : "Mode 1",
@@ -46,7 +46,7 @@ const MyBookings = () => {
   const today = new Date().toISOString().split("T")[0];
 
   const sortedBookings = bookingsData.sort((a, b) =>
-    a.date.localeCompare(b.date)
+    b.date.localeCompare(a.date)
   );
 
   //sortBookings(sortedBookings

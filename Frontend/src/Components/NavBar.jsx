@@ -100,7 +100,7 @@ const login = () =>{
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            <CustomLink to="/addreservation">Book Now</CustomLink>
+            <CustomLink to="/tripSchedule">Book Now</CustomLink>
           </Typography>
           <Typography
             variant="h6"
