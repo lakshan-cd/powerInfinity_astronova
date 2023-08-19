@@ -11,5 +11,5 @@ router.post("/signup", signup);
 router.post("/login", login);
 router.post("/verifyEmail", SendEmail);
 router.get("/forgotPassword/:id/:token", forgotpassword);
-router.post("/:id/:token", reset);
+router.post("/reset/:id/:token", reset);
 module.exports = router;

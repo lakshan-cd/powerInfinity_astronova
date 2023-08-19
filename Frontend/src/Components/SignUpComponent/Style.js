@@ -36,7 +36,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 }));
 
 const Namefield = styled(Box)(({ theme }) => ({
-  padding: theme.spacing(0, 2),
+  padding: theme.spacing(0, 0),
 
   display: "flex",
   alignItems: "center",

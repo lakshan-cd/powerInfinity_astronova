@@ -1,4 +1,4 @@
-import { Box, Button, Container, CssBaseline, Grid, Typography, colors,  } from '@mui/material'
+import { Alert, Box, Button, Container, CssBaseline, Grid, Typography, colors,  } from '@mui/material'
 import React, { useState } from 'react'
 import { heading,main,grid2,grid1,boxmain,formbox,textfield,loginbutton,text,headingBox,textLeft,textCenter } from './loginstyle'
 import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
@@ -7,34 +7,49 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup'
 import SettingsVoiceIcon from "@mui/icons-material/SettingsVoice";
 import axios from 'axios';
+import{Link, useNavigate, useParams} from 'react-router-dom'
 
 const theme = createTheme()
 
-
-
  const ResetPassword = () => {
+  const {id} = useParams()
   const [formError,setFormError] = useState(false)
   const[errorMessage,setErrorMessage] = useState('')
   const [formSuccess,setFormSuccess] = useState(false)
+  const navigte = useNavigate()
+  console.log(id)
+  const mainGrid ={
+    height:'150vh',
+    color:"white",
+    backgroundImage: 'url(..\back.png)',
+    backgroundColor: "black",
+    backgroundSize:'cover',
+  
+  backgroundRepeat: 'no-repeat',
+  backgroundAttachment: 'fixed',}
 
   const formik = useFormik({
     initialValues: {
       password: "",
-      conformpw:""
+      conformpw:"",
+      token:""
     },
     validationSchema:Yup.object({
       password: Yup.string().required("Please enter your password"),
       conformpw:Yup.string().oneOf([Yup.ref("password"),null],"passwords do not match").required("Please conform your password"),
+      token: Yup.string().required("Please enter verification token from Email"),
     }),
     onSubmit: (values) =>{
       console.log(values)
-      axios.post("http://localhost:4000/api/user/reset",{
-            email : values.email
+      axios.post(`http://localhost:4000/api/user/reset/${id}/${values.token}`,{
+            password : values.password
               }).then((res)=>{
                 console.log(res)
                 if(res.status == 201){
+                  console.log(res)
                   setFormError(false)
                   setFormSuccess(true)
+                  navigte('/signin')
 
 
                 }
@@ -51,7 +66,7 @@ const theme = createTheme()
   return (
     
       <ThemeProvider theme={theme}>
-            <Grid container component="main" sx={main}>
+            <Grid container component="main" sx={mainGrid}>
                 <CssBaseline/>
                
                <Grid item md={12} sm={12} xs={12} sx={grid2}>
@@ -86,7 +101,6 @@ const theme = createTheme()
                id="conformpw" 
                name="conformpw"
                type='password'
-               color="secondary"
                value={formik.values.conformpw}
                onChange={formik.handleChange}
                onBlur={formik.handleBlur}
@@ -94,6 +108,20 @@ const theme = createTheme()
                error={formik.touched.conformpw && Boolean(formik.errors.conformpw)}
                sx={textfield}
                 />
+                <Typography  sx={text}>verification Token</Typography>
+                <p style={{fontSize:12,marginTop:"0px"}}> (Please enter verification token from Email)</p>
+              
+              <TextField 
+              id="token" 
+              name="token"
+              type='text'
+              value={formik.values.token}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              helperText={formik.touched.token ? formik.errors.token :''}
+              error={formik.touched.token && Boolean(formik.errors.token)}
+              sx={textfield}
+               />
 
 {formError ?  <Alert severity="error" sx={{marginTop:"15px"}}>{errorMessage}</Alert> : null}
  {formSuccess ?  <Alert severity="success" sx={{marginTop:"15px"}}>Password Changed Successfully</Alert> : null}
@@ -108,6 +136,10 @@ const theme = createTheme()
                   Reset Password
                 </Button>
                   </Box>
+                  <Box sx={headingBox}>
+                  <Typography sx={{marginTop:"15px"}}><Link to={'/'}>Home</Link></Typography>
+                  </Box>
+                  
                 </Box>
                </Box>
                </Box >
