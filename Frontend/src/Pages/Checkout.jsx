@@ -16,7 +16,8 @@ import PaymentForm from './PaymentForm';
 import Review from './Review';
 import NavBar from "../Components/NavBar";
 import backgroundImageUrl from '../assets/back.png';
-import imageSrc from '../assets/image 2.png';
+import imageSrc1 from '../assets/image 2.png';
+import imageSrc2 from '../assets/image 3.png';
 
 const steps                           = ['Booking', 'Billed', 'Payment'];
 
@@ -191,11 +192,22 @@ export default function Checkout() {
     borderRadius                    : '20px',
   }}
 >
-<img
-    src={imageSrc} // Replace with the actual image source
-    alt="Image description"
-    style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '20px' }}
-  />
+{activeStep === 1 && ( 
+    <img
+      src={imageSrc1}
+      alt="Image description"
+      style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '20px' }}
+    />
+  )}
+
+{activeStep === 2 && ( 
+    <img
+      src={imageSrc2}
+      alt="Image description"
+      style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '20px' }}
+    />
+  )}
+
   </Paper>
         </Paper>
       </Container>
