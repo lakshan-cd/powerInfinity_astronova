@@ -12,10 +12,13 @@ import AboutUs from "./Pages/AboutUs";
 // import BookingForm from "./Pages/Booking/BookingForm";
 import BookingForm from "./Pages/Booking/BookingForm";
 import MyBookings from "./Pages/MyBookings/MyBookings";
+import Logout from "./Pages/login/logout";
+// import signOut from "./Pages/login/Logout";
 
 
 function App() {
   return (
+    
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<Home />} />
@@ -23,10 +26,10 @@ function App() {
         <Route path="/Signup" element={<Signup />} />
         <Route path="/resetpassword/:id" element={<ResetPassword/>} />
         <Route path="/addreservation" element={<BookingForm />} />
-
         <Route path="/tripSchedule" element={<TripSchedule />} />
         <Route path="/AboutUs" element={<AboutUs />} />
         <Route path="/mybookings" element={<MyBookings />} />
+        <Route path= "/signout" element={<Logout/>} />
       </Routes>
     </BrowserRouter>
   );
