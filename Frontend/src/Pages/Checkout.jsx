@@ -16,7 +16,7 @@ import PaymentForm from './PaymentForm';
 import Review from './Review';
 import NavBar from "../Components/NavBar";
 import backgroundImageUrl from '../assets/back.png';
-
+import imageSrc from '../assets/image 2.png';
 
 const steps                           = ['Booking', 'Billed', 'Payment'];
 
@@ -174,6 +174,29 @@ export default function Checkout() {
             </React.Fragment>
           )}
         </Paper>
+
+        <Paper 
+  variant                             = "outlined"
+  sx={{
+    my                                : { xs: 3, md: 6 },
+    p                                 : { xs: 2, md: 3 },
+    width                             : '38%',
+    height : '80%',
+    position                          : 'absolute',
+    top                               : '20',
+    left                              : '',
+    right                             : 10,
+    margin                            : '0 20px 0 0',
+    backgroundColor                   : 'rgba(224, 242, 241, 0.2)',
+    borderRadius                    : '20px',
+  }}
+>
+<img
+    src={imageSrc} // Replace with the actual image source
+    alt="Image description"
+    style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '20px' }}
+  />
+  </Paper>
         </Paper>
       </Container>
       </Container>
