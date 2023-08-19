@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchAppBar from "../../Components/NavBar";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -23,9 +23,16 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import SettingsVoiceIcon from "@mui/icons-material/SettingsVoice";
+import { useLocation } from "react-router-dom";
 
 const BookingForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
+ const location = useLocation();
+ const queryParams = location.state;
+
+  useEffect(() => {
+    console.log("data from timetable",queryParams);
+  }, [queryParams]);
 
   const progress = () => {
     setCurrentStep(currentStep + 1);
