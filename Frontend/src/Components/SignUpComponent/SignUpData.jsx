@@ -228,6 +228,24 @@ console.log(stateName)
                error={formik.touched.postalcode && Boolean(formik.errors.postalcode)}  />
             </Box>
           </Namefield>
+          
+          <InputText>Country</InputText>
+          <FormControl error={countryError}>
+          <SelectDrop  
+          onChange={(e) => {
+            handlecountry(e)
+            setCountryError(false)
+          }}>
+            <MenuItem value="">Select a Country</MenuItem>
+            {countrydata.map((getcountry, index) => (
+              <MenuItem value={getcountry.country_id} key={index}>
+                {getcountry.country_name}
+              </MenuItem>
+            ))}
+          </SelectDrop>
+          <FormHelperText>Please select Country</FormHelperText>
+          </FormControl>
+
           <InputText>State</InputText>
           <FormControl error={stateError}>
           <SelectDrop 
@@ -247,22 +265,7 @@ console.log(stateName)
           <FormHelperText>please select state</FormHelperText>
           </FormControl>
 
-          <InputText>Country</InputText>
-          <FormControl error={countryError}>
-          <SelectDrop  
-          onChange={(e) => {
-            handlecountry(e)
-            setCountryError(false)
-          }}>
-            <MenuItem value="">Select a Country</MenuItem>
-            {countrydata.map((getcountry, index) => (
-              <MenuItem value={getcountry.country_id} key={index}>
-                {getcountry.country_name}
-              </MenuItem>
-            ))}
-          </SelectDrop>
-          <FormHelperText>Please select Country</FormHelperText>
-          </FormControl>
+          
           
           <InputText >Password</InputText>
           <Input inputProps={{

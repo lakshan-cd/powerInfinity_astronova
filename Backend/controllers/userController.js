@@ -6,6 +6,7 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+const bcrypt = require("bcrypt");
 const signup = async (req, res) => {
   const {
     firstName,
@@ -69,6 +70,9 @@ const transporter = nodemailer.createTransport({
     user: "powerinfinitypow@gmail.com",
     pass: "wrxlpjxjagamugdb",
   },
+  tls: {
+    rejectUnauthorized: false
+  }
 });
 
 const SendEmail = async (req, res) => {
@@ -79,8 +83,10 @@ const SendEmail = async (req, res) => {
 
     const userfind = await User.findOne({ email: email, user });
     const token = jwt.sign({ _id: userfind._id }, keysecret, {
-      expiresIn: "1d",
+      expiresIn: "5m",
     });
+    const encodedToken = encodeURIComponent(token);
+
     const setusertoken = await User.findByIdAndUpdate(
       { _id: userfind._id },
       { verifytoken: token },
@@ -90,10 +96,11 @@ const SendEmail = async (req, res) => {
       const mailOptions = {
         from: "powerinfinitypow@gmail.com",
         to: email,
-        subject: "Sending Email for verification",
-        text: `This link send Hasthiya IT software project management system 
-        Change your account password(valid for 2 minutes)
-         http://localhost:3000/forgotPassword/${userfind.id}/${setusertoken.verifytoken}`,
+        subject: " Email for verification",
+        html: `Please Use following link to reset your astronova account password 
+              Change your account password(valid for 2 minutes)<br/>
+               Link : http://localhost:5173/resetpassword/${userfind.id} <br/><br/>
+               Verification token: ${setusertoken.verifytoken}`
       };
       transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
@@ -108,7 +115,8 @@ const SendEmail = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    console.log(error)
+    res.status(400).json({ message: error.status });
   }
 };
 
@@ -150,7 +158,8 @@ const reset = async (req, res) => {
       res.status(401).json({ status: 401, message: "user not exits" });
     }
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    console.log(error)
+    res.status(400).json({ message: error.message });
   }
 };
 //Check the user token
