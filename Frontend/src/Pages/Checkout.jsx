@@ -18,26 +18,26 @@ import NavBar from "../Components/NavBar";
 import backgroundImageUrl from '../assets/back.png';
 
 
-const steps = ['Booking', 'Billed', 'Payment'];
+const steps                           = ['Booking', 'Billed', 'Payment'];
 
 
 
 
 function getStepContent(step) {
   switch (step) {
-    case 0:
+    case 0                            : 
       return <AddressForm />;
-    case 1:
+    case 1                            : 
       return <PaymentForm />;
-    case 2:
+    case 2                            : 
       return <Review />;
-    default:
+    default                           : 
       throw new Error('Unknown step');
   }
 }
 
 export default function Checkout() {
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep]   = React.useState(0);
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -48,11 +48,11 @@ export default function Checkout() {
   };
 
   const backgroundStyles = {
-    backgroundImage: `url('../assets/back.png')`,
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundAttachment: 'fixed',
-    backgroundColor: '#000000',
+    backgroundImage                   : `url('../assets/back.png')`,
+    backgroundSize                    : 'cover',
+    backgroundRepeat                  : 'no-repeat',
+    backgroundAttachment              : 'fixed',
+    backgroundColor                   : '#000000',
     
     
   };
@@ -62,76 +62,76 @@ export default function Checkout() {
       <CssBaseline />
       
       <AppBar
-        position="absolute"
-        color="default"
-        elevation={0}
+        position                      = "absolute"
+        color                         = "default"
+        elevation                     = {0}
         sx={{
-          position: 'relative',
-          borderBottom: (t) => `1px solid ${t.palette.divider}`,
+          position                    : 'relative',
+          borderBottom                : (t) => `1px solid ${t.palette.divider}`,
         }}
       >
         <NavBar />
 
        
       </AppBar>
-      <Container style={backgroundStyles}>
-      <Container component="main"  maxWidth="md" sx={{ mb: 4 }}
-      style={backgroundStyles}>
+      <Container style                = {backgroundStyles}>
+      <Container component            = "main"  maxWidth="md" sx={{ mb: 4 }}
+      style                           = {backgroundStyles}>
        
        <Paper
-  variant="outlined"
+  variant                             = "outlined"
   sx={{
-    m: 0, // Remove margin
-    p: { xs: 2, md: 3 },
-    backgroundColor: '#E0F2F1',
-    backgroundImage: `url(${backgroundImageUrl})`,
-    backgroundSize: '100vw 100vh', // Set width and height to cover the viewport
-    backgroundAttachment: 'fixed', // Keep the background fixed while scrolling
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    zIndex: -1,
+    m                                 : 0,
+    p                                 : { xs: 2, md: 3 },
+    backgroundColor                   : '#E0F2F1',
+    backgroundImage                   : `url(${backgroundImageUrl})`,
+    backgroundSize                    : '100vw 100vh',
+    backgroundAttachment              : 'fixed',
+    position                          : 'absolute',
+    top                               : 0,
+    left                              : 0,
+    right                             : 0,
+    bottom                            : 0,
+    zIndex                            : -1,
   }}
 >
 
-           <Typography variant="h4" gutterBottom
+           <Typography variant        = "h4" gutterBottom
             sx={{
-              fontWeight: 'bold', // Change font weight to bold
-              color: '#CC9200', // Change text color to your desired color
-              marginTop: '40px', // Adjust top margin to change the position
+              fontWeight              : 'bold',
+              color                   : '#CC9200',
+              marginTop               : '40px',
             }}>
             Booking Details
           </Typography>
 
           <Paper
-  variant="outlined"
+  variant                             = "outlined"
   sx={{
-    my: { xs: 3, md: 6 },
-    p: { xs: 2, md: 3 },
-    width: '60%', // Adjust the width as needed
-    position: 'absolute', // Position absolutely
-    top: '20px', // Adjust the top distance from the top of the viewport
-    left: 0,
-    right: 0,
-    margin: '0 20px 0 0', // Move the Paper to the left side
-    backgroundColor: 'rgba(224, 242, 241, 0)', // Adjust this color for the middle area
+    my                                : { xs: 3, md: 6 },
+    p                                 : { xs: 2, md: 3 },
+    width                             : '60%',
+    position                          : 'absolute',
+    top                               : '20px',
+    left                              : 0,
+    right                             : 0,
+    margin                            : '0 20px 0 0',
+    backgroundColor                   : 'rgba(224, 242, 241, 0)',
   }}
 >
 
          
-<Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
+<Stepper activeStep                   = {activeStep} sx={{ pt: 3, pb: 5 }}>
   {steps.map((label) => (
-    <Step key={label}>
+    <Step key                         = {label}>
       <StepLabel>
         <Typography
-          variant="h6"
-          component="div"
+          variant                     = "h6"
+          component                   = "div"
           sx={{
-            fontSize: '1.2rem', // Adjust the font size as needed
-            fontWeight: 'bold', 
-            color: '#ffff', // Make the text bold
+            fontSize                  : '1.2rem',
+            fontWeight                : 'bold',
+            color                     : '#ffff',
           }}
         >
           {label}
@@ -144,29 +144,29 @@ export default function Checkout() {
 
           {activeStep === steps.length ? (
             <React.Fragment>
-             <Typography variant="h5" gutterBottom style={{ color: 'white' }}>
+             <Typography variant      = "h5" gutterBottom style={{ color: 'white' }}>
   Thank you for your order.
 </Typography>
-<Typography variant="subtitle1" style={{ color: 'white' }}>
+<Typography variant                   = "subtitle1" style={{ color: 'white' }}>
   Your order number is #2001539. We have emailed your order confirmation, and
   will send you an update when your order has shipped.
 </Typography>
 
             </React.Fragment>
-          ) : (
+          )                           : (
             <React.Fragment>
               {getStepContent(activeStep)}
-              <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <Box sx                 = {{ display: 'flex', justifyContent: 'flex-end' }}>
               {activeStep !== 0 && (
-  <Button onClick={handleBack} sx={{ mt: 3, ml: 1, color: '#CC9200' }}>
+  <Button onClick                     = {handleBack} sx={{ mt: 3, ml: 1, color: '#CC9200' }}>
     Back
   </Button>
 )}
 
 <Button
-  variant="contained"
-  onClick={handleNext}
-  sx={{ mt: 3, ml: 1, backgroundColor: '#CC9200' }}
+  variant                             = "contained"
+  onClick                             = {handleNext}
+  sx                                  = {{ mt: 3, ml: 1, backgroundColor: '#CC9200' }}
 >
   {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
 </Button>

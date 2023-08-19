@@ -12,10 +12,10 @@ function App() {
     <Router>
       <Routes>
        
-        <Route exact path="/" element={<Checkout />} />
-        <Route path="/PaymentForm" element={<PaymentForm />} />
-        <Route path="/review" element={<Review />} />
-        <Route path="/address" element={<AddressForm />} />
+        <Route exact path   = "/" element={<Checkout />} />
+        <Route path         = "/PaymentForm" element={<PaymentForm />} />
+        <Route path         = "/review" element={<Review />} />
+        <Route path         = "/address" element={<AddressForm />} />
 
        
       </Routes>

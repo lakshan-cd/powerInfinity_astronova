@@ -13,217 +13,217 @@ import { Link } from "react-router-dom";
 import AddIcon from '@mui/icons-material/Add';
 
 const WhiteBackgroundStyledTextField = styled(TextField)({
-  marginBottom: theme => theme.spacing(2),
+  marginBottom                      : theme => theme.spacing(2),
   '& .MuiInputBase-input': {
-    color: 'black', // Set input text color to black
-    backgroundColor: 'white',
-    borderRadius: 10,
-    padding: '10px 12px', // Adjust padding for better appearance
+    color                           : 'black',
+    backgroundColor                 : 'white',
+    borderRadius                    : 10,
+    padding                         : '10px 12px',
   },
   '& .MuiInputLabel-root': {
-    color: 'black', // Set label text color to black
-    backgroundColor: 'white', // Set label background color to white
-    padding: '0 4px', // Adjust padding for better appearance
-    borderRadius: '10px 10px 0 0', // Set label background radius only for top corners
+    color                           : 'black',
+    backgroundColor                 : 'white',
+    padding                         : '0 4px',
+    borderRadius                    : '10px 10px 0 0',
   },
   '& .MuiInputLabel-root.MuiInputLabel-shrink': {
-    backgroundColor: 'transparent', // Set label background to transparent when label shrinks
+    backgroundColor                 : 'transparent',
   },
   '& .MuiInputLabel-root.Mui-focused': {
-    color: 'white', // Set focused label text color to black
+    color                           : 'white',
   },
 });
 
 const FormContainer = styled('div')({
-  marginBottom: theme => theme.spacing(3),
+  marginBottom                      : theme => theme.spacing(3),
 });
 
 const StyledTextField = styled(TextField)({
-  marginBottom: theme => theme.spacing(2),
+  marginBottom                      : theme => theme.spacing(2),
 });
 
 const ImageContainer = styled('div')({
-  flex: 1,
-  display: 'flex',
-  position: 'absolute',
-  justifyContent: 'center',
-  alignItems: 'center',
+  flex                              : 1,
+  display                           : 'flex',
+  position                          : 'absolute',
+  justifyContent                    : 'center',
+  alignItems                        : 'center',
 });
 
 
 export default function AddressForm() {
   return (
    
-    <div className="pay">
+    <div className                  = "pay">
    
-      <Paper elevation={7}  sx={{ margin: 0, padding: 3, backgroundColor: 'rgba(255, 255, 255, 0.2)' }}>
+      <Paper elevation              = {7}  sx={{ margin: 0, padding: 3, backgroundColor: 'rgba(255, 255, 255, 0.2)' }}>
         <FormContainer>
          
-          <Grid container spacing={2}>
+          <Grid container spacing   = {2}>
            
-                  <Grid item xs={12} sm={6}>
-          <Typography variant="h6" gutterBottom style={{ color: 'white', fontWeight: 'bold', marginBottom: '0px' }}>
+                  <Grid item xs     = {12} sm={6}>
+          <Typography variant       = "h6" gutterBottom style={{ color: 'white', fontWeight: 'bold', marginBottom: '0px' }}>
             From
           </Typography>
           <WhiteBackgroundStyledTextField
             required
-            id="From"
-            name="From"
-            label=""
+            id                      = "From"
+            name                    = "From"
+            label                   = ""
             fullWidth
-            autoComplete="given-From"
-            variant="standard"
+            autoComplete            = "given-From"
+            variant                 = "standard"
           />
         </Grid>
 
            
-        <Grid item xs={12} sm={6} >
-          <Typography variant="h6" gutterBottom style={{ color: 'white', fontWeight: 'bold', marginBottom: '0px' }}>
+        <Grid item xs               = {12} sm={6} >
+          <Typography variant       = "h6" gutterBottom style={{ color: 'white', fontWeight: 'bold', marginBottom: '0px' }}>
             To
           </Typography>
           <WhiteBackgroundStyledTextField
             required
-            id="To"
-            name="To"
+            id                      = "To"
+            name                    = "To"
           
             fullWidth
-            autoComplete="given-To"
-            variant="standard"
+            autoComplete            = "given-To"
+            variant                 = "standard"
           />
         </Grid>
 
 
            
-        <Grid item xs={12} sm={6}>
-          <Typography variant="h6" gutterBottom style={{ color: 'white', fontWeight: 'bold', marginBottom: '0px' }}>
+        <Grid item xs               = {12} sm={6}>
+          <Typography variant       = "h6" gutterBottom style={{ color: 'white', fontWeight: 'bold', marginBottom: '0px' }}>
             From Date
           </Typography>
           <WhiteBackgroundStyledTextField
             required
-            id="From-Date"
-            name="From-Date"
+            id                      = "From-Date"
+            name                    = "From-Date"
             
             fullWidth
-            autoComplete="From-Date"
-            variant="standard"
+            autoComplete            = "From-Date"
+            variant                 = "standard"
           />
         </Grid>
 
            
-        <Grid item xs={12} sm={6}>
-          <Typography variant="h6" gutterBottom style={{ color: 'white', fontWeight: 'bold', marginBottom: '0px' }}>
+        <Grid item xs               = {12} sm={6}>
+          <Typography variant       = "h6" gutterBottom style={{ color: 'white', fontWeight: 'bold', marginBottom: '0px' }}>
             To Date
           </Typography>
           <WhiteBackgroundStyledTextField
             required
-            id="To-Date"
-            name="To-Date"
+            id                      = "To-Date"
+            name                    = "To-Date"
             
             fullWidth
-            autoComplete="To-Date"
-            variant="standard"
+            autoComplete            = "To-Date"
+            variant                 = "standard"
           />
         </Grid>
 
 
             
-        <Grid item xs={12} sm={6}>
-          <Typography variant="h6" gutterBottom style={{ color: 'white', fontWeight: 'bold', marginBottom: '0px' }}>
+        <Grid item xs               = {12} sm={6}>
+          <Typography variant       = "h6" gutterBottom style={{ color: 'white', fontWeight: 'bold', marginBottom: '0px' }}>
             Mode
           </Typography>
           <WhiteBackgroundStyledTextField
             required
-            id="Mode"
-            name="Mode"
+            id                      = "Mode"
+            name                    = "Mode"
             
             fullWidth
-            autoComplete="Mode"
-            variant="standard"
+            autoComplete            = "Mode"
+            variant                 = "standard"
           />
         </Grid>
 
             
-        <Grid item xs={12} sm={6}>
-          <Typography variant="h6" gutterBottom style={{ color: 'white', fontWeight: 'bold', marginBottom: '0px' }}>
+        <Grid item xs               = {12} sm={6}>
+          <Typography variant       = "h6" gutterBottom style={{ color: 'white', fontWeight: 'bold', marginBottom: '0px' }}>
             Departure
           </Typography>
           <WhiteBackgroundStyledTextField
             required
-            id="Departure"
-            name="Departure"
+            id                      = "Departure"
+            name                    = "Departure"
             
             fullWidth
-            autoComplete="Departure"
-            variant="standard"
+            autoComplete            = "Departure"
+            variant                 = "standard"
           />
         </Grid>
 
 
            
-        <Grid item xs={12} sm={6}>
-          <Typography variant="h6" gutterBottom style={{ color: 'white', fontWeight: 'bold', marginBottom: '0px' }}>
+        <Grid item xs               = {12} sm={6}>
+          <Typography variant       = "h6" gutterBottom style={{ color: 'white', fontWeight: 'bold', marginBottom: '0px' }}>
             Class
           </Typography>
           <WhiteBackgroundStyledTextField
             required
-            id="Class"
-            name="Class"
+            id                      = "Class"
+            name                    = "Class"
            
             fullWidth
-            autoComplete="Class"
-            variant="standard"
+            autoComplete            = "Class"
+            variant                 = "standard"
           />
         </Grid>
 
             
-        <Grid item xs={12} sm={6}>
-          <Typography variant="h6" gutterBottom style={{ color: 'white', fontWeight: 'bold', marginBottom: '0px' }}>
+        <Grid item xs               = {12} sm={6}>
+          <Typography variant       = "h6" gutterBottom style={{ color: 'white', fontWeight: 'bold', marginBottom: '0px' }}>
             Passenger Count
           </Typography>
           <WhiteBackgroundStyledTextField
             required
-            id="Passenger-Count"
-            name="Passenger-Count"
+            id                      = "Passenger-Count"
+            name                    = "Passenger-Count"
            
             fullWidth
-            autoComplete="Passenger-Count"
-            variant="standard"
+            autoComplete            = "Passenger-Count"
+            variant                 = "standard"
           />
         </Grid>
 
 
             
-        <Grid item xs={12} sm={6}>
-          <Typography variant="h6" gutterBottom style={{ color: 'white', fontWeight: 'bold', marginBottom: '0px' }}>
+        <Grid item xs               = {12} sm={6}>
+          <Typography variant       = "h6" gutterBottom style={{ color: 'white', fontWeight: 'bold', marginBottom: '0px' }}>
             Add Passengers
           </Typography>
           <WhiteBackgroundStyledTextField
             required
-            id=" Add-Passengers"
-            name="Add-Passengers"
+            id                      = " Add-Passengers"
+            name                    = "Add-Passengers"
             
             fullWidth
-            autoComplete="Add-Passengers"
-            variant="standard"
+            autoComplete            = "Add-Passengers"
+            variant                 = "standard"
           />
         </Grid>
 
            
-                  <Grid item xs={12} sm={6}>
-          <Typography variant="h6" gutterBottom style={{ color: 'white', fontWeight: 'bold', marginBottom: '0px' }}>
+                  <Grid item xs     = {12} sm={6}>
+          <Typography variant       = "h6" gutterBottom style={{ color: 'white', fontWeight: 'bold', marginBottom: '0px' }}>
             Search by username
           </Typography>
           <WhiteBackgroundStyledTextField
             required
-            id="Search-by-username"
-            name="Search-by-username"
+            id                      = "Search-by-username"
+            name                    = "Search-by-username"
             
             fullWidth
-            autoComplete="Search-by-username"
-            variant="standard"
+            autoComplete            = "Search-by-username"
+            variant                 = "standard"
           />
         
-        <Button variant="contained" style={{ marginBottom: '-10px', backgroundColor: 'rgba(255, 255, 255, 0.2)'  }} sx={{ mt: 3, mb: 2 }}>
+        <Button variant             = "contained" style={{ marginBottom: '-10px', backgroundColor: 'rgba(255, 255, 255, 0.2)'  }} sx={{ mt: 3, mb: 2 }}>
       <AddIcon />
      
     
@@ -238,22 +238,22 @@ export default function AddressForm() {
 
            
           </Grid>
-          <Grid item xs={3} sm={3}>
-          <Typography variant="h6" gutterBottom style={{ color: 'white', fontWeight: 'bold', marginBottom: '0px' }}>
+          <Grid item xs             = {3} sm={3}>
+          <Typography variant       = "h6" gutterBottom style={{ color: 'white', fontWeight: 'bold', marginBottom: '0px' }}>
             Price
           </Typography>
           <WhiteBackgroundStyledTextField
             required
-            id="Price"
-            name="Price"
+            id                      = "Price"
+            name                    = "Price"
             
-            fullWidth=""
-            autoComplete="Price"
-            variant="standard"
+            fullWidth               = ""
+            autoComplete            = "Price"
+            variant                 = "standard"
           />
         </Grid>
 
-          <Link to="/Checkout">
+          <Link to                  = "/Checkout">
           
 
           </Link>
