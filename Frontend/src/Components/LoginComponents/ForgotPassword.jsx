@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -8,6 +8,8 @@ import {text} from "../../Pages/login/loginstyle"
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { Alert, AlertTitle, Backdrop, CircularProgress } from '@mui/material';
 
 const style = {
   position: 'absolute',
@@ -15,7 +17,7 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 500,
-  height:350,
+  
   backgroundColor: 'black',
   border: '2px solid #000',
   boxShadow: 24,
@@ -31,7 +33,7 @@ const textfield = {
 
     minWidth:{sm:"200px",md:"300px"},
     opacity:"0.7",
-    // padding: [theme.spacing(0, 0),
+    
   marginRight: "10px",
   marginTop: "10px",
   borderRadius: 2,
@@ -67,8 +69,10 @@ const textfield = {
 }
 
 const ForgotPassword = (props) => {
-
-    
+  const [formError,setFormError] = useState(false)
+  const[errorMessage,setErrorMessage] = useState('')
+  const [formSuccess,setFormSuccess] = useState(false)
+  const [progress,setProgress] = useState(false)
 
     const formik = useFormik({
         initialValues: {
@@ -80,6 +84,24 @@ const ForgotPassword = (props) => {
         }),
         onSubmit: (values) =>{
           console.log(values)
+          setProgress(true)
+          axios.post("http://localhost:4000/api/user/verifyEmail",{
+            email : values.email
+              }).then((res)=>{
+                console.log(res)
+                if(res.status == 201){
+                  setFormError(false)
+                  setProgress(false)
+                  setFormSuccess(true)
+                }
+                console.log(res)
+              }).catch((err) =>{
+                console.log(err)
+                setErrorMessage(err.response.data.message)
+                setProgress(false)
+                setFormError(true)
+                
+              })
         },})
 
   return (
@@ -89,13 +111,24 @@ const ForgotPassword = (props) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+        <Box sx={style} component="form" onSubmit={(e) =>{
+          e.preventDefault()
+          formik.handleSubmit()
+        }}>
+          <Typography id="modal-modal-title" variant="h4" component="h2">
             Forgot password
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 3 }}>
             Please Enter your email below to send verification mail
           </Typography>
+
+          {progress ? <Backdrop
+        sx={{ color: '#CC9200', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={true}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>:null}
+
           <Typography sx={text}>Email</Typography>
                <TextField 
                id="email" 
@@ -108,10 +141,13 @@ const ForgotPassword = (props) => {
                error={formik.touched.email && Boolean(formik.errors.email)}
                sx={textfield} />
 
+ {formError ?  <Alert severity="error" sx={{marginTop:"15px"}}>{errorMessage}</Alert> : null}
+ {formSuccess ?  <Alert severity="success" sx={{marginTop:"15px"}}>Email sent successfully.Please check your email</Alert> : null}
                 <Button
                 type='submit'
                  variant='contained'
                  sx={loginbutton}
+                 disabled={formSuccess}
                  >
                   Send Email
                 </Button>

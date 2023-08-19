@@ -40,7 +40,7 @@ const theme = createTheme()
     password: values.password,
       }).then((res)=>{
         if(res.status == 200){
-          sessionStorage.setItem("logintoken",res.data.token)
+          localStorage.setItem("logintoken",res.data.token)
           navigate("/tripSchedule")
           console.log(res)
         }
