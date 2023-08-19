@@ -23,7 +23,7 @@ const Home = () => {
         <Button/>
     </div>
     <Button/>
-      <Link to="/addreservation">
+      <Link to="/AddressForm">
         <button>booking</button>
       </Link>
       <Button/>

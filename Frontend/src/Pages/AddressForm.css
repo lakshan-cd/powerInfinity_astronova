@@ -1,0 +1,28 @@
+/* AddressForm.css */
+
+.custom-input-root {
+    color: black;
+    background-color: white;
+    border-radius: 10px 10px 0 0;
+    padding: 10px 12px;
+  }
+  
+  .custom-input-focused {
+    color: black;
+  }
+  
+  .custom-label-root {
+    color: black;
+    background-color: white;
+    border-radius: 10px 10px 0 0;
+    padding: 5px;
+  }
+  
+  .custom-label-focused {
+    color: black;
+  }
+  
+  .form-container {
+    margin-bottom: 16px; /* Apply margin to the form container */
+  }
+  

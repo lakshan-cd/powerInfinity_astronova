@@ -1,27 +1,26 @@
-import { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import TripSchedule from "./Pages/tripSchedule/TripSchedule";
-import Home from "./Pages/Home";
-import Payment from "./Pages/Payment";
-import Signup from "./Pages/Signup";
-import BookingForm from "./Components/Booking/BookingForm";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from'./pages/Home';
+import Checkout from'./pages/Checkout';
+import PaymentForm from './pages/PaymentForm';
+import Review from './pages/Review';
+import AddressForm from './pages/AddressForm';
+
+
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
-        <Route exact path="/" element={<Home />} />
+       
+        <Route exact path="/" element={<Checkout />} />
+        <Route path="/PaymentForm" element={<PaymentForm />} />
+        <Route path="/review" element={<Review />} />
+        <Route path="/address" element={<AddressForm />} />
 
-        <Route exact path="/Payment" element={<Payment />} />
-
-        <Route  path="Payment" element={<Payment />} />
-        <Route path="/Signup" element={<Signup />} />
-        <Route path="/addreservation" element={<BookingForm />} />
-        <Route path="/tripSchedule" element={<TripSchedule />} />
+       
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 
 export default App;
-
-

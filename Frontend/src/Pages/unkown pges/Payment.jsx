@@ -31,6 +31,7 @@ const Payment = () => {
 
      <Container elevation={7} sx={{ margin: 0, padding: 3, width: "50%", backgroundColor: "rgba(255, 255, 255, 0.1)" }}>
         <Paper elevation={7} sx={{ margin: 5, padding: 3, width: "70%", height: 500, backgroundColor: "rgba(255, 255, 255, 0.8)" }}>
+          
           <form>
             <TextField label="Card Number" fullWidth value={cardNumber} onChange={handleCardNumberChange} margin="normal" />
             <TextField label="Expiry Date" fullWidth value={expiryDate} onChange={handleExpiryDateChange} margin="normal" />
