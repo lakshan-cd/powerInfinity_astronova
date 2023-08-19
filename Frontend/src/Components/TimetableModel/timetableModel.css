@@ -95,11 +95,14 @@
   transition: ease-out 0.2s;
   /* border: 1px solid #cc9200; */
   margin-right: 30px;
+     
+
     }
 
 .ttBookButton:hover{
       background-color: #000000;
       color: #cc9200;
+    
     }
 
 
