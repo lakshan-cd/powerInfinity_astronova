@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from'./pages/Home';
-import Checkout from'./pages/Checkout';
-import PaymentForm from './pages/PaymentForm';
-import Review from './pages/Review';
-import AddressForm from './pages/AddressForm';
+import Checkout from'./Pages/Checkout';
+import PaymentForm from './Pages/PaymentForm';
+import Review from './Pages/Review';
+import AddressForm from './Pages/AddressForm';
 
 
 function App() {
