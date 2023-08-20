@@ -9,13 +9,13 @@ const stripePayment = async (req, res) => {
   const passengers = req.body.paymentDetails.passengerIds;
 
   const passenger_ids = passengers.map((passenger) => passenger.id);
-  console.log(passenger_ids);
+  console.log(req.body.paymentDetails.class);
   const customer = await stripe.customers.create({
     // pass real data from the frontend
     metadata: {
       userId: req.body.paymentDetails.userId,
       tickets_data: JSON.stringify({
-        class: req.body.paymentDetails.flightClass,
+        class: req.body.paymentDetails.class,
         users: passenger_ids.length,
         passenger_ids: passenger_ids,
       }),
@@ -54,7 +54,7 @@ const createBooking = async (customer, data) => {
   const ticketsData = JSON.parse(customer.metadata.tickets_data);
 
   const newBooking = await Booking.create({
-    trip_id: trip_id,
+    trip_id: "64dfac13aef4187111f938a2",
     user_id: customer.metadata.userId,
     customer_id: data.customer,
     passsenger_ids: ticketsData.passenger_ids,

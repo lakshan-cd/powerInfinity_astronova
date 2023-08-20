@@ -21,8 +21,12 @@ const getBookingDetails = async (req, res) => {
 };
 
 const bookings = async (req, res) => {
+  const { userId } = req.params;
   try {
-    const bookingDetails = await Booking.find({ user_id: req.userId });
+    const bookingDetails = await Booking.find({ user_id: userId }).populate({
+      path: "trip_id",
+      populate: { path: "from to" },
+    });
     if (!bookingDetails) {
       return createError(404, "No booking for this user");
     }
