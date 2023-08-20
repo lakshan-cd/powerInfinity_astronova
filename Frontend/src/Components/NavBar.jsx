@@ -68,8 +68,6 @@ export default function SearchAppBar() {
 
 const navigate = useNavigate()
 const token = localStorage.getItem('logintoken')
-const decode = jwtDecode(token)
-console.log(decode)
 
 const login = () =>{
   navigate('/signin')
@@ -105,7 +103,7 @@ const login = () =>{
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            <CustomLink to="/addreservation">Book Now</CustomLink>
+            <CustomLink to="/tripSchedule">Book Now</CustomLink>
           </Typography>
           <Typography
             variant="h6"
@@ -113,9 +111,7 @@ const login = () =>{
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            <Link to = "/mybookings">
-            My Bookings{" "}
-            </Link>
+            <CustomLink to="/mybookings">My Bookings </CustomLink>
           </Typography>
           <Typography
             variant="h6"

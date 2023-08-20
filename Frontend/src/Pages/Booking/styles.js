@@ -65,7 +65,7 @@ const FormAroundDiv = styled("div")(({ theme }) => ({
   }));
 
   const FormInPut = styled(TextField)(({ theme }) => ({
-    color: "#dddddd",
+    color: "#030303",
      width: "350px" ,
      backgroundColor: "#F7F1F1",
      borderRadius: 10,
