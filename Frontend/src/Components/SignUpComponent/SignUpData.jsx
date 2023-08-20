@@ -6,6 +6,7 @@ import {
   FormControlLabel,
   FormHelperText,
   MenuItem,
+  Typography,
 } from "@mui/material";
 import { Namefield, Input, MainGrid, InputText, SelectDrop,ButtonBox,SignUpButton } from "./Style";
 import Box from "@mui/material/Box";
@@ -14,7 +15,7 @@ import {useFormik} from 'formik'
 import * as Yup from 'yup'
 import axios from "axios";
 import Alert from '@mui/material/Alert'
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const SignUpData = () => {
@@ -313,6 +314,7 @@ console.log(stateName)
           <ButtonBox>
             <SignUpButton type="submit">Sign Up</SignUpButton>
           </ButtonBox>
+          <Typography sx={{alignSelf:'center',marginBottom:"10px"}}><Link to={'/'}>Back</Link></Typography>
         </FormControl>
       </MainGrid>
     </div>

@@ -27,7 +27,7 @@ const Signup = () => {
               <img
                 src="images/Logo.png"
                 style={{
-                  width: "200px",
+                  width: "300px",
                   marginTop: "20px",
                   marginLeft: "280px",
                 }}
@@ -44,6 +44,10 @@ const Signup = () => {
           <ORBox>
             <Typography variant="h5">OR</Typography>
           </ORBox>
+          <ButtonBox sx={{marginLeft:"280px"}}>
+            <SignUpButton type="submit">Sign Up</SignUpButton>
+          </ButtonBox>
+
         </Grid>
         <RightGrid item xs={6}>
           <SignUpDataBox>

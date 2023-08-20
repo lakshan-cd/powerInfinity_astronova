@@ -116,6 +116,10 @@ const theme = createTheme()
                   Sign In
                 </Button>
                   </Box>
+                  <Box sx={headingBox}>
+                  <Typography sx={{marginBottom:"10px",marginTop:'10px'}}><Link to={'/'}>Back</Link></Typography>
+                  </Box>
+                 
                   <Typography sx={textCenter}>
                     New to website?  <Link  to='/Signup'>Sign Up</Link> 
                   </Typography>
