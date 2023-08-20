@@ -6,6 +6,6 @@ const {
 const router = express.Router();
 
 router.get("/user-bookings/:userId", bookings);
-router.get("/bookings/:bookingid", getBookingDetails);
+router.get("/bookings/:id", getBookingDetails);
 
 module.exports = router;
