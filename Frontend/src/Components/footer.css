@@ -1,0 +1,44 @@
+.icon-container {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 10px;
+}
+.icon-container:hover {
+  color: #cc9200;
+  border-color: #cc9200;
+  cursor: pointer;
+}
+.item-container {
+  max-height: 200px;
+  margin-left: 25%;
+}
+.typography {
+  color: #cc9200;
+  box-sizing: border-box;
+  border-left: 3px solid #cc9200;
+  padding-left: 3px;
+}
+
+.item-container a {
+  font-size: 15px;
+  color: white;
+}
+.item-container a:hover {
+  color: #cc9200;
+}
+
+/* Medea query */
+
+@media (max-width: 900px) {
+  .item-container {
+    margin-left: 0px;
+    display: grid;
+
+    place-items: center;
+  }
+}
