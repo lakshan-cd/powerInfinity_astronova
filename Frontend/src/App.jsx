@@ -8,13 +8,12 @@ import Signup from "./Pages/Signup";
 // import BookingForm from "./Components/Booking/BookingForm";
 import ResetPassword from "./Pages/login/ResetPassword";
 import ForgotPassword from "./Components/LoginComponents/ForgotPassword";
-import AboutUs from "./Pages/AboutUs";
+import AboutUs from "./Pages/AboutUs/AboutUs";
 // import BookingForm from "./Pages/Booking/BookingForm";
 import BookingForm from "./Pages/Booking/BookingForm";
 import MyBookings from "./Pages/MyBookings/MyBookings";
 import Logout from "./Pages/login/logout";
 // import signOut from "./Pages/login/Logout";
-
 
 function App() {
   return (
@@ -22,9 +21,11 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route path="/signin" element={<Login/>}/>
+        <Route path="/signin" element={<Login />} />
         <Route path="/Signup" element={<Signup />} />
         <Route path="/resetpassword/:id" element={<ResetPassword/>} />
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
+        <Route path="/resetpassword" element={<ResetPassword />} />
         <Route path="/addreservation" element={<BookingForm />} />
         <Route path="/tripSchedule" element={<TripSchedule />} />
         <Route path="/AboutUs" element={<AboutUs />} />

@@ -64,11 +64,10 @@ const StyledLogin = styled(Button)(({ theme }) => ({
 }));
 
 export default function SearchAppBar() {
-
-const navigate = useNavigate()
-const login = () =>{
-  navigate('/signin')
-}
+  const navigate = useNavigate();
+  const login = () => {
+    navigate("/signin");
+  };
   const history = useNavigate();
 
   const navigateToSignup = () => {
@@ -108,9 +107,7 @@ const login = () =>{
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            <Link to = "/mybookings">
-            My Bookings{" "}
-            </Link>
+            <CustomLink to="/mybookings">My Bookings </CustomLink>
           </Typography>
           <Typography
             variant="h6"

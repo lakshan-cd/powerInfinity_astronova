@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import SettingsVoiceIcon from "@mui/icons-material/SettingsVoice";
 import Select from "@mui/material/Select";
 import { Link } from "react-router-dom";
-
+import PhoneIcon from "@mui/icons-material/Phone";
 const StyledAdd = styled(Button)(({ theme }) => ({
   marginLeft: "30px",
   backgroundColor: "#CC9200",
@@ -44,7 +44,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   pointerEvents: "none",
   display: "flex",
   alignItems: "center",
-  justifyContent: "center"
+  justifyContent: "center",
 }));
 
 const Namefield = styled(Box)(({ theme }) => ({
@@ -86,7 +86,7 @@ const Input = styled(TextField)(({ theme, isCentered, hasBlueBorder }) => ({
   height: "40px",
   opacity: "0.7",
   textAlign: isCentered ? "center" : "left", // Center the text if isCentered is true
-  
+
   "&:hover": {
     height: "40px",
     "& fieldset": {
@@ -117,7 +117,11 @@ const InputText = styled(Typography)(({ theme }) => ({
   padding: theme.spacing(0, 0),
   marginTop: "20px",
 }));
-
+const TalkText = styled(Typography)(({ theme }) => ({
+  padding: theme.spacing(0, 4),
+  fontSize: "45px",
+  color: "#9CD7FF",
+}));
 const SignUpText = styled(Typography)(({ theme }) => ({
   padding: theme.spacing(0, 5),
   fontSize: "40px",
@@ -130,8 +134,20 @@ const Header = styled(Typography)(({ theme }) => ({
   justifyContent: "center",
   alignItems: "center",
 }));
+
+const CompanyData = styled(Typography)(({ theme }) => ({
+  padding: theme.spacing(0.7, 1),
+  fontSize: "23px",
+}));
 const SignUpBox = styled(Box)(({ theme }) => ({
   padding: theme.spacing(3, 2),
+
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+const ButtonBoxData = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(5, 4),
 
   display: "flex",
   alignItems: "center",
@@ -154,6 +170,10 @@ const ORBox = styled(Box)(({ theme }) => ({
   marginLeft: "220px",
   marginTop: "50px",
 }));
+const DataBox = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+}));
+
 const VoiceIcon = styled(SettingsVoiceIcon)(({ theme }) => ({
   padding: theme.spacing(0, 2),
   display: "flex",
@@ -202,7 +222,7 @@ const SignUpDataBox = styled(Box)(({ theme }) => ({
 }));
 
 const LeftAbout = styled(Grid)(({ theme }) => ({
-  padding: theme.spacing(0, 0),
+  padding: theme.spacing(0, 5),
   alignItems: "center",
   justifyContent: "center",
   marginTop: "85px",
@@ -210,28 +230,65 @@ const LeftAbout = styled(Grid)(({ theme }) => ({
   borderRadius: "20px",
   marginLeft: "20px",
   width: "650px",
+  backgroundColor: "rgba(255, 255, 255, 0.04)",
+  color: "white",
+  transition: "all ease-in 0.15s",
 }));
 
 const RightAbout = styled(Grid)(({ theme }) => ({
-  padding: theme.spacing(0, 0),
-
+  padding: theme.spacing(0, 5),
   alignItems: "center",
   justifyContent: "center",
-  backgroundColor: "white",
   marginTop: "85px",
-  opacity: 0.4,
   height: "450px",
-  width: "650px",
   borderRadius: "20px",
   marginLeft: "30px",
+  width: "650px",
+  backgroundColor: "rgba(255, 255, 255, 0.04)",
+  color: "white",
+  transition: "all ease-in 0.15s",
+}));
+const ConnectBox = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(5, 2),
+  display: "flex",
 }));
 
+const HeaderBox = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(0, 0),
+
+  display: "flex", // Display as flex container
+  alignItems: "center", // Align items vertically
+  justifyContent: "center",
+  marginTop: "25px",
+}));
+const TextBox = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(0, 0),
+
+  display: "flex", // Display as flex container
+  alignItems: "center", // Align items vertically
+  justifyContent: "center",
+  marginTop: "25px",
+  textAlign: "center",
+}));
+const Text = styled(Typography)(({ theme }) => ({
+  padding: theme.spacing(0, 0),
+
+  fontSize: "25px",
+}));
+Text;
 const AboutContainer = styled(Grid)(({ theme }) => ({
   display: "flex",
   marginLeft: "70px",
 }));
+const CIcon = styled(PhoneIcon)(({ theme }) => ({
+  padding: theme.spacing(0, 0),
+
+  fontSize: "55px",
+}));
 export {
+  ConnectBox,
   Header,
+  HeaderBox,
   AboutContainer,
   StyledAdd,
   SearchIconWrapper,
@@ -254,4 +311,11 @@ export {
   CustomLink,
   LeftAbout,
   RightAbout,
+  TextBox,
+  Text,
+  CIcon,
+  TalkText,
+  DataBox,
+  CompanyData,
+  ButtonBoxData,
 };
