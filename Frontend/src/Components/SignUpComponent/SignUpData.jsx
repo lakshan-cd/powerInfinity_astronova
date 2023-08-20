@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 
 import {
+  Backdrop,
   Checkbox,
+  CircularProgress,
   FormControl,
   FormControlLabel,
   FormHelperText,
@@ -26,6 +28,7 @@ const SignUpData = () => {
  const[stateError,setStateError]=useState(false)
  const [formError,setFormError] = useState(false)
  const[errorMessage,setErrorMessage] = useState('')
+ const [progress,setProgress] = useState(false)
  const navigate = useNavigate()
 
  const countryValidation = () =>{
@@ -74,6 +77,7 @@ const SignUpData = () => {
       if(countryValidation() || stateValidation()){
          return
       }
+      setProgress(true)
       console.log(values)
       axios.post("http://localhost:4000/api/user/signup",{
     firstName : values.firstname,
@@ -86,6 +90,7 @@ const SignUpData = () => {
     state: stateName,
       }).then((res)=>{
         if(res.status == 200){
+          setProgress(false)
           alert("Account created successfully")
           navigate("/signin")
 
@@ -179,6 +184,12 @@ console.log(stateName)
                helperText={formik.touched.email ? formik.errors.email :''}
                error={formik.touched.email && Boolean(formik.errors.email)} 
                />
+{progress ? <Backdrop
+        sx={{ color: '#CC9200', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={true}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>:null}
 
           <InputText>ContactNumber</InputText>
           <Input inputProps={{
