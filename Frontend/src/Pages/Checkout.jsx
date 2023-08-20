@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react'; 
 import CssBaseline from '@mui/material/CssBaseline';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -18,8 +18,12 @@ import NavBar from "../Components/NavBar";
 import backgroundImageUrl from '../assets/back.png';
 import imageSrc1 from '../assets/image 2.png';
 import imageSrc2 from '../assets/image 3.png';
+import Modal from '@mui/material/Modal';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { fontSize } from '@mui/system';
 
 const steps                           = ['Booking', 'Billed', 'Payment'];
+
 
 
 
@@ -38,6 +42,16 @@ function getStepContent(step) {
 }
 
 export default function Checkout() {
+
+  const [open, setOpen] = React.useState(false);
+
+const handleOpen = () => {
+  setOpen(true);
+};
+
+const handleClose = () => {
+  setOpen(false);
+};
   const [activeStep, setActiveStep]   = React.useState(0);
 
   const handleNext = () => {
@@ -165,9 +179,15 @@ export default function Checkout() {
 )}
 
 <Button
-  variant                             = "contained"
-  onClick                             = {handleNext}
-  sx                                  = {{ mt: 3, ml: 1, backgroundColor: '#CC9200' }}
+  variant="contained"
+  onClick={() => {
+    if (activeStep === steps.length - 1) {
+      handleOpen(); 
+    } else {
+      handleNext(); 
+    }
+  }}
+  sx={{ mt: 3, ml: 1, backgroundColor: '#CC9200' }}
 >
   {activeStep === steps.length - 1 ? 'Pay now' : 'Next'}
 </Button>
@@ -210,6 +230,69 @@ export default function Checkout() {
 
   </Paper>
         </Paper>
+       
+        <Modal
+  open={open}
+  onClose={handleClose}
+  aria-labelledby="modal-modal-title"
+  aria-describedby="modal-modal-description"
+>
+  <Box
+    sx={{
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      width: 385,
+      height: 491,
+      bgcolor: 'rgba(255, 255, 255, 1)',
+      border: '2px solid #000',
+      boxShadow: 24,
+      backgroundImage: `url(${backgroundImageUrl})`,
+      backgroundSize: 'cover',
+      p: 4,
+      borderRadius: '81px',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center', // Center vertically
+      alignItems: 'center', // Center horizontally
+    }}
+  >
+
+<CheckCircleIcon sx={{ color: 'orange', fontSize: '100px' }} />
+
+    <Typography
+      id="modal-modal-title"
+      variant="h3"
+      component="h2"
+      color="orange"
+    >
+      Success
+    </Typography>
+    <Typography
+      id="modal-modal-description"
+      variant="h5"
+      component="h2"
+      sx={{ mt: 2 }}
+      color="orange"
+    >
+      Your Payment was successful
+    </Typography>
+
+    <Button
+  variant="contained"
+  
+  sx={{ mt: 3, ml: 1, backgroundColor: '#CC9200' }}
+>
+  Continue
+</Button>
+
+
+  </Box>
+</Modal>
+
+
+
       </Container>
       </Container>
     </React.Fragment>
