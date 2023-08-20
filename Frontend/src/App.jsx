@@ -13,6 +13,7 @@ import AboutUs from "./Pages/AboutUs/AboutUs";
 import BookingForm from "./Pages/Booking/BookingForm";
 import MyBookings from "./Pages/MyBookings/MyBookings";
 import Logout from "./Pages/login/logout";
+import TicketDetails from "./Pages/ticketDetails/TicketDetails";
 // import signOut from "./Pages/login/Logout";
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Route path="/AboutUs" element={<AboutUs />} />
         <Route path="/mybookings" element={<MyBookings />} />
         <Route path="/signout" element={<Logout />} />
+        <Route path="/ticketDetails/:id" element={<TicketDetails />} />
       </Routes>
     </BrowserRouter>
   );
