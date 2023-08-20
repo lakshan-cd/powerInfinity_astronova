@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchAppBar from "../../Components/NavBar";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -23,9 +23,29 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import SettingsVoiceIcon from "@mui/icons-material/SettingsVoice";
+import { Link, useLocation } from "react-router-dom";
 
 const BookingForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
+ const location = useLocation();
+ const queryParams = location.state;
+
+ //date and time 
+ const dateTimeString = queryParams.departureTime;
+  const dateTime = new Date(dateTimeString);
+// Extract the date and time components
+const fromDate = dateTime.toISOString().slice(0, 10); // "2023-08-20"
+const departureTime = dateTime.toISOString().slice(11, 19); // "12:00:00"
+
+//end date
+ const endDateString = queryParams.endDate;
+ const endTime = new Date(endDateString);
+ const toDate = endTime.toISOString().slice(0, 10);
+
+
+  useEffect(() => {
+    console.log("data from timetable",queryParams);
+  }, [queryParams]);
 
   const progress = () => {
     setCurrentStep(currentStep + 1);
@@ -37,6 +57,28 @@ const BookingForm = () => {
   const handleChange = (event) => {
     setflightCLass(event.target.value);
   };
+
+  //show passengers count
+  const [selectedPassengers, setSelectedPassengers] = useState([]);
+
+  const handlePassengerSelection = (event, newValue) => {
+    setSelectedPassengers(newValue);
+  };
+
+  //calculate the total price
+  let totalCost = queryParams.price; 
+  // console.log(totalCost);
+  // price
+  if(flightClass == "10"){
+      totalCost = totalCost + ( 3000 * selectedPassengers.length) ;
+  }else if(flightClass == "20"){
+    totalCost = totalCost + ( 2000 * selectedPassengers.length);
+  }else if(flightClass == "30"){
+     totalCost = totalCost + ( 1000 * selectedPassengers.length); 
+  }
+
+  
+
   return (
     <div>
       <div>
@@ -67,10 +109,10 @@ const BookingForm = () => {
           </Grid>
 
           <Grid item xs={7}>
-            <FormInPut id="standard-basic" variant="outlined" disabled />
+            <FormInPut id="standard-basic" variant="outlined" disabled label={queryParams.from.name}/>
           </Grid>
           <Grid item xs={5}>
-            <FormInPut id="standard-basic" variant="outlined" disabled />
+            <FormInPut id="standard-basic" variant="outlined" disabled label={queryParams.to.name} />
           </Grid>
           <Grid item xs={7}>
             <Typography>From - Date</Typography>
@@ -81,17 +123,18 @@ const BookingForm = () => {
           <Grid item xs={7}>
             <FormInPut
               id="standard-basic"
-              label=""
               variant="outlined"
               disabled
+              label={fromDate}
             />
           </Grid>
           <Grid item xs={5}>
             <FormInPut
               id="standard-basic"
-              label=""
               variant="outlined"
+              label={toDate}
               disabled
+              
             />
           </Grid>
           <Grid item xs={7}>
@@ -103,16 +146,16 @@ const BookingForm = () => {
           <Grid item xs={7}>
             <FormInPut
               id="standard-basic"
-              label=""
               variant="outlined"
+              label = {queryParams.mode}
               disabled
             />
           </Grid>
           <Grid item xs={5}>
             <FormInPut
               id="standard-basic"
-              label=""
               variant="outlined"
+              label={departureTime}
               disabled
             />
           </Grid>
@@ -123,12 +166,6 @@ const BookingForm = () => {
             <Typography>Passenger count</Typography>
           </Grid>
           <Grid item xs={7}>
-            {/* <FormInPut
-              id="standard-basic"
-              label=""
-              variant="outlined"
-              
-            /> */}
 
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label" sx={{ color: "black" }}>
@@ -154,7 +191,7 @@ const BookingForm = () => {
           <Grid item xs={5}>
             <FormInPut
               id="standard-basic"
-              label=""
+              label={selectedPassengers.length}
               variant="outlined"
               disabled
             />
@@ -166,8 +203,11 @@ const BookingForm = () => {
             <Autocomplete
               multiple
               id="tags-outlined"
-              options={top100Films}
-              getOptionLabel={(option) => option.title}
+              options={peopleData}
+              getOptionLabel={(option) => `${option.id} - ${option.name}`} 
+              // value={selectedPassengers}
+              onChange={handlePassengerSelection}
+
               // defaultValue={[top100Films[4]]}
               filterSelectedOptions
               renderInput={(params) => (
@@ -179,9 +219,9 @@ const BookingForm = () => {
               )}
               sx={{
                 backgroundColor: "#fff",
-                borderRadius: 5,
+                borderRadius: 2,
 
-                borderColor: "transparent",
+                borderColor: "white",
                 input: { color: "#000" },
                 "& .MuiAutocomplete-tag": {
                   backgroundColor: "rgba(128, 128, 128, 0.7)",
@@ -212,7 +252,7 @@ const BookingForm = () => {
               <Typography
                 sx={{ fontSize: "25px", color: "#CC9200", fontWeight: "bold" }}>
                 {" "}
-                25000 $
+                {totalCost} $
               </Typography>
             </DivAroundPrice>
           </Grid>
@@ -226,9 +266,11 @@ const BookingForm = () => {
         marginTop={"30px"}
         marginBottom={"100px"}>
         {/* <ColorButton variant="contained">Custom CSS</ColorButton> */}
-        <BootstrapButton variant="" disableRipple>
+        <Link to="/tripSchedule">
+        <BootstrapButton variant="" disableRipple >
           Cancel
         </BootstrapButton>
+        </Link>
         <BootstrapButton variant="" disableRipple onPress={progress}>
           Next
         </BootstrapButton>
@@ -237,55 +279,24 @@ const BookingForm = () => {
   );
 };
 
-const top100Films = [
-  { title: "The Shawshank Redemption", year: 1994 },
-  { title: "The Godfather", year: 1972 },
-  { title: "The Godfather: Part II", year: 1974 },
-  { title: "The Dark Knight", year: 2008 },
-  { title: "12 Angry Men", year: 1957 },
-  { title: "Schindler's List", year: 1993 },
-  { title: "Pulp Fiction", year: 1994 },
-  {
-    title: "The Lord of the Rings: The Return of the King",
-    year: 2003,
-  },
-  { title: "The Good, the Bad and the Ugly", year: 1966 },
-  { title: "Fight Club", year: 1999 },
-  {
-    title: "The Lord of the Rings: The Fellowship of the Ring",
-    year: 2001,
-  },
-  { title: "City of God", year: 2002 },
-  { title: "Se7en", year: 1995 },
-  { title: "The Silence of the Lambs", year: 1991 },
-  { title: "It's a Wonderful Life", year: 1946 },
-  { title: "Life Is Beautiful", year: 1997 },
-  { title: "The Usual Suspects", year: 1995 },
-  { title: "Léon: The Professional", year: 1994 },
-  { title: "Spirited Away", year: 2001 },
-  { title: "Saving Private Ryan", year: 1998 },
-  { title: "Once Upon a Time in the West", year: 1968 },
-  { title: "American History X", year: 1998 },
-  { title: "Interstellar", year: 2014 },
-  { title: "Casablanca", year: 1942 },
-  { title: "City Lights", year: 1931 },
-  { title: "Psycho", year: 1960 },
-  { title: "The Green Mile", year: 1999 },
-  { title: "The Intouchables", year: 2011 },
-  { title: "Modern Times", year: 1936 },
-  { title: "Raiders of the Lost Ark", year: 1981 },
-  { title: "Rear Window", year: 1954 },
-  { title: "The Pianist", year: 2002 },
-  { title: "The Departed", year: 2006 },
-  { title: "Terminator 2: Judgment Day", year: 1991 },
-  { title: "Back to the Future", year: 1985 },
-  { title: "Whiplash", year: 2014 },
-  { title: "Gladiator", year: 2000 },
-  { title: "Memento", year: 2000 },
-  { title: "The Prestige", year: 2006 },
-  { title: "The Lion King", year: 1994 },
-  { title: "Apocalypse Now", year: 1979 },
-  { title: "Alien", year: 1979 },
-  { title: "Sunset Boulevard", year: 1950 },
+const peopleData = [
+  {name :"Sydney " , id : "3572393437"},
+{name :"Sydney" , id : "6602816831"},
+{name :"Nicholas" , id : "7378516408"},
+{name :"Dominik" , id : "0515654277"},
+{name :"Alexander" , id : "9017700195"},
+{name :"Jessica" , id : "2464266481"},
+{name :"Lyndon" , id : "0987021184"},
+{name :"Emily" , id : "7050806441"},
+{name :"Fiona" , id : "7050806441"},
+{name :"Belinda" , id : "3453256369"},
+{name :"Maddie" , id : "1528410720"},
+{name :"Maximilian" , id : "5328197323"},
+{name :"Frederick" , id : "9478168260"},
+{name :"Samantha" , id : "5465748941"},
+{name :"Marcus" , id : "5421636808"},
+{name :"Ryan" , id : "5411682648"},
+{name :"Robert" , id : "0355779355"},
+{name :"Miley" , id : "0069185329"},
 ];
 export default BookingForm;
