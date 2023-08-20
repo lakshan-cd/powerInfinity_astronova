@@ -3,42 +3,46 @@ const Stripe = require("stripe");
 const stripe = Stripe(process.env.STRIPE_KEY);
 const Booking = require("../models/bookingModel");
 
-const price = 50;
-const line_items = [
-  {
-    price_data: {
-      currency: "usd",
-      product_data: {
-        name: `Class A Tickets`,
-      },
-      unit_amount: price * 100, // shoud multiply by 100
-    },
-    quantity: 2,
-  },
-];
-
+let trip_id;
 const stripePayment = async (req, res) => {
+  trip_id = req.body.paymentDetails.trip_id;
+  const passengers = req.body.paymentDetails.passengerIds;
+
+  const passenger_ids = passengers.map((passenger) => passenger.id);
+  console.log(passenger_ids);
   const customer = await stripe.customers.create({
     // pass real data from the frontend
     metadata: {
-      userId: "sampath",
+      userId: req.body.paymentDetails.userId,
       tickets_data: JSON.stringify({
-        class: "sample",
-        users: 4,
-        passenger_ids: ["1", "2", "3"],
-        distance: "120000Km",
+        class: req.body.paymentDetails.flightClass,
+        users: passenger_ids.length,
+        passenger_ids: passenger_ids,
       }),
     },
   });
+
+  const line_items = [
+    {
+      price_data: {
+        currency: "usd",
+        product_data: {
+          name: `${req.body.paymentDetails.flightClass} Tickets`,
+        },
+        unit_amount: req.body.paymentDetails.tiketPrice * 100, // shoud multiply by 100
+      },
+      quantity: passenger_ids.length,
+    },
+  ];
+
   const session = await stripe.checkout.sessions.create({
     line_items,
     // if not works add userId as id
     customer: customer.id,
     mode: "payment",
-    success_url: "http://localhost:5173/",
+    success_url: "http://localhost:5173/mybookings",
     cancel_url: "http://localhost:5173/",
   });
-
   res.send({ url: session.url });
 };
 
@@ -50,12 +54,12 @@ const createBooking = async (customer, data) => {
   const ticketsData = JSON.parse(customer.metadata.tickets_data);
 
   const newBooking = await Booking.create({
+    trip_id: trip_id,
     user_id: customer.metadata.userId,
     customer_id: data.customer,
     passsenger_ids: ticketsData.passenger_ids,
-    distance: ticketsData.distance,
     class: ticketsData.class,
-    total_payment: data.amount_total,
+    total_payment: data.amount_total / 100,
     payment_status: data.payment_status,
     payment_intent: data.payment_intent,
   });

@@ -24,32 +24,30 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import SettingsVoiceIcon from "@mui/icons-material/SettingsVoice";
 import { Link, useLocation } from "react-router-dom";
+import axios from "axios";
+import jwtDecode from "jwt-decode";
 
 const BookingForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
- const location = useLocation();
- const queryParams = location.state;
+  const location = useLocation();
+  const queryParams = location.state;
 
- //date and time 
- const dateTimeString = queryParams.departureTime;
+  //date and time
+  const dateTimeString = queryParams.departureTime;
   const dateTime = new Date(dateTimeString);
-// Extract the date and time components
-const fromDate = dateTime.toISOString().slice(0, 10); // "2023-08-20"
-const departureTime = dateTime.toISOString().slice(11, 19); // "12:00:00"
+  // Extract the date and time components
+  const fromDate = dateTime.toISOString().slice(0, 10); // "2023-08-20"
+  const departureTime = dateTime.toISOString().slice(11, 19); // "12:00:00"
 
-//end date
- const endDateString = queryParams.endDate;
- const endTime = new Date(endDateString);
- const toDate = endTime.toISOString().slice(0, 10);
-
+  //end date
+  const endDateString = queryParams.endDate;
+  const endTime = new Date(endDateString);
+  const toDate = endTime.toISOString().slice(0, 10);
 
   useEffect(() => {
-    console.log("data from timetable",queryParams);
+    console.log("data from timetable", queryParams);
+    console.log("hi");
   }, [queryParams]);
-
-  const progress = () => {
-    setCurrentStep(currentStep + 1);
-  };
 
   const [flightClass, setflightCLass] = React.useState("");
   // const [class, setClass] = useState('');
@@ -61,23 +59,49 @@ const departureTime = dateTime.toISOString().slice(11, 19); // "12:00:00"
   //show passengers count
   const [selectedPassengers, setSelectedPassengers] = useState([]);
 
+  let idsArray;
   const handlePassengerSelection = (event, newValue) => {
     setSelectedPassengers(newValue);
   };
 
+  const token = localStorage.getItem("logintoken");
+  const decode = jwtDecode(token);
+  let totalCost = queryParams.price;
+  const paymentDetails = {
+    userId: decode._id,
+    class: flightClass,
+    passengerIds: selectedPassengers,
+    trip_id: idsArray,
+    tiketPrice: totalCost,
+  };
+
+  const payment = async () => {
+    setCurrentStep(currentStep + 1);
+
+    axios
+      .post("http://localhost:4000/api/stripe/create-checkout-session", {
+        paymentDetails,
+      })
+      .then((res) => {
+        console.log(res.data.url);
+        if (res.data.url) {
+          window.location.href = res.data.url;
+        }
+      })
+      .catch((err) => console.log(err.message));
+  };
+
   //calculate the total price
-  let totalCost = queryParams.price; 
+
   // console.log(totalCost);
   // price
-  if(flightClass == "10"){
-      totalCost = totalCost + ( 3000 * selectedPassengers.length) ;
-  }else if(flightClass == "20"){
-    totalCost = totalCost + ( 2000 * selectedPassengers.length);
-  }else if(flightClass == "30"){
-     totalCost = totalCost + ( 1000 * selectedPassengers.length); 
+  if (flightClass == "Business Class") {
+    totalCost = totalCost + 3000 * selectedPassengers.length;
+  } else if (flightClass == "First Class") {
+    totalCost = totalCost + 2000 * selectedPassengers.length;
+  } else if (flightClass == "Economy Class") {
+    totalCost = totalCost + 1000 * selectedPassengers.length;
   }
-
-  
 
   return (
     <div>
@@ -109,10 +133,20 @@ const departureTime = dateTime.toISOString().slice(11, 19); // "12:00:00"
           </Grid>
 
           <Grid item xs={7}>
-            <FormInPut id="standard-basic" variant="outlined" disabled label={queryParams.from.name}/>
+            <FormInPut
+              id="standard-basic"
+              variant="outlined"
+              disabled
+              label={queryParams.from.name}
+            />
           </Grid>
           <Grid item xs={5}>
-            <FormInPut id="standard-basic" variant="outlined" disabled label={queryParams.to.name} />
+            <FormInPut
+              id="standard-basic"
+              variant="outlined"
+              disabled
+              label={queryParams.to.name}
+            />
           </Grid>
           <Grid item xs={7}>
             <Typography>From - Date</Typography>
@@ -134,7 +168,6 @@ const departureTime = dateTime.toISOString().slice(11, 19); // "12:00:00"
               variant="outlined"
               label={toDate}
               disabled
-              
             />
           </Grid>
           <Grid item xs={7}>
@@ -147,7 +180,7 @@ const departureTime = dateTime.toISOString().slice(11, 19); // "12:00:00"
             <FormInPut
               id="standard-basic"
               variant="outlined"
-              label = {queryParams.mode}
+              label={queryParams.mode}
               disabled
             />
           </Grid>
@@ -166,7 +199,6 @@ const departureTime = dateTime.toISOString().slice(11, 19); // "12:00:00"
             <Typography>Passenger count</Typography>
           </Grid>
           <Grid item xs={7}>
-
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label" sx={{ color: "black" }}>
                 Select class
@@ -181,10 +213,11 @@ const departureTime = dateTime.toISOString().slice(11, 19); // "12:00:00"
                   width: "350px",
                   backgroundColor: "#F7F1F1",
                   borderRadius: "10px",
-                }}>
-                <MenuItem value={10}>Business Class</MenuItem>
-                <MenuItem value={20}>First Class</MenuItem>
-                <MenuItem value={30}>Economy</MenuItem>
+                }}
+              >
+                <MenuItem value={"Business Class"}>Business Class</MenuItem>
+                <MenuItem value={"First Class"}>First Class</MenuItem>
+                <MenuItem value={"Economy Class"}>Economy</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -204,11 +237,9 @@ const departureTime = dateTime.toISOString().slice(11, 19); // "12:00:00"
               multiple
               id="tags-outlined"
               options={peopleData}
-              getOptionLabel={(option) => `${option.id} - ${option.name}`} 
-              // value={selectedPassengers}
+              getOptionLabel={(option) => `${option.id} - ${option.name}`}
+              value={selectedPassengers}
               onChange={handlePassengerSelection}
-
-              // defaultValue={[top100Films[4]]}
               filterSelectedOptions
               renderInput={(params) => (
                 <TextField
@@ -220,7 +251,6 @@ const departureTime = dateTime.toISOString().slice(11, 19); // "12:00:00"
               sx={{
                 backgroundColor: "#fff",
                 borderRadius: 2,
-
                 borderColor: "white",
                 input: { color: "#000" },
                 "& .MuiAutocomplete-tag": {
@@ -237,7 +267,8 @@ const departureTime = dateTime.toISOString().slice(11, 19); // "12:00:00"
               display: "flex",
               justifyContent: "center",
               marginTop: "30px",
-            }}>
+            }}
+          >
             <Typography sx={{ fontSize: "25px" }}>Price</Typography>
           </Grid>
           <Grid
@@ -247,10 +278,12 @@ const departureTime = dateTime.toISOString().slice(11, 19); // "12:00:00"
               display: "flex",
               justifyContent: "center",
               marginTop: "10px",
-            }}>
+            }}
+          >
             <DivAroundPrice>
               <Typography
-                sx={{ fontSize: "25px", color: "#CC9200", fontWeight: "bold" }}>
+                sx={{ fontSize: "25px", color: "#CC9200", fontWeight: "bold" }}
+              >
                 {" "}
                 {totalCost} $
               </Typography>
@@ -264,15 +297,16 @@ const departureTime = dateTime.toISOString().slice(11, 19); // "12:00:00"
         justifyContent="flex-end"
         marginRight={"120px"}
         marginTop={"30px"}
-        marginBottom={"100px"}>
+        marginBottom={"100px"}
+      >
         {/* <ColorButton variant="contained">Custom CSS</ColorButton> */}
         <Link to="/tripSchedule">
-        <BootstrapButton variant="" disableRipple >
-          Cancel
-        </BootstrapButton>
+          <BootstrapButton variant="" disableRipple>
+            Cancel
+          </BootstrapButton>
         </Link>
-        <BootstrapButton variant="" disableRipple onPress={progress}>
-          Next
+        <BootstrapButton onClick={payment} variant="" disableRipple>
+          Pay Now
         </BootstrapButton>
       </Stack>
     </div>
@@ -280,23 +314,23 @@ const departureTime = dateTime.toISOString().slice(11, 19); // "12:00:00"
 };
 
 const peopleData = [
-  {name :"Sydney " , id : "3572393437"},
-{name :"Sydney" , id : "6602816831"},
-{name :"Nicholas" , id : "7378516408"},
-{name :"Dominik" , id : "0515654277"},
-{name :"Alexander" , id : "9017700195"},
-{name :"Jessica" , id : "2464266481"},
-{name :"Lyndon" , id : "0987021184"},
-{name :"Emily" , id : "7050806441"},
-{name :"Fiona" , id : "7050806441"},
-{name :"Belinda" , id : "3453256369"},
-{name :"Maddie" , id : "1528410720"},
-{name :"Maximilian" , id : "5328197323"},
-{name :"Frederick" , id : "9478168260"},
-{name :"Samantha" , id : "5465748941"},
-{name :"Marcus" , id : "5421636808"},
-{name :"Ryan" , id : "5411682648"},
-{name :"Robert" , id : "0355779355"},
-{name :"Miley" , id : "0069185329"},
+  { name: "Sydney ", id: "3572393437" },
+  { name: "Sydney", id: "6602816831" },
+  { name: "Nicholas", id: "7378516408" },
+  { name: "Dominik", id: "0515654277" },
+  { name: "Alexander", id: "9017700195" },
+  { name: "Jessica", id: "2464266481" },
+  { name: "Lyndon", id: "0987021184" },
+  { name: "Emily", id: "7050806441" },
+  { name: "Fiona", id: "7050806441" },
+  { name: "Belinda", id: "3453256369" },
+  { name: "Maddie", id: "1528410720" },
+  { name: "Maximilian", id: "5328197323" },
+  { name: "Frederick", id: "9478168260" },
+  { name: "Samantha", id: "5465748941" },
+  { name: "Marcus", id: "5421636808" },
+  { name: "Ryan", id: "5411682648" },
+  { name: "Robert", id: "0355779355" },
+  { name: "Miley", id: "0069185329" },
 ];
 export default BookingForm;
