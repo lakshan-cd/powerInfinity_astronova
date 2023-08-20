@@ -1,11 +1,15 @@
-const express = require("express");
-const Stripe = require("stripe");
+
 const Booking = require("../models/bookingModel");
 const createError = require("../utils/createError");
 
 const getBookingDetails = async (req, res) => {
   try {
-    const booking = await Booking.findById(req.body.bookingId);
+    const { id } = req.params;
+
+    const booking = await Booking.findById(id).populate({
+      path: "trip_id",
+      populate: { path: "from to" }
+    });
 
     if (!booking) {
       return createError(404, "Booking not found");
