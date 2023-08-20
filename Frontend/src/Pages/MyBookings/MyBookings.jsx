@@ -1,60 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Typography, Card, CardContent, Divider, Button } from "@mui/material";
 import { HeaderContainer, BootstrapButton } from "./styles";
 import SearchAppBar from "../../Components/NavBar";
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import CardMedia from "@mui/material/CardMedia";
-import IconButton from "@mui/material/IconButton";
-import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import SkipNextIcon from "@mui/icons-material/SkipNext";
 import Grid from "@mui/material/Grid";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-
-const getBookingData = async () => {
-  try {
-    const res = axios.get("", {});
-    console.log(res.data);
-  } catch (err) {
-    console.log(res);
-  }
-};
-const bookingsData = [
-  {
-    from: "Earth",
-    to: "Marse",
-    endDate: "2023-08-20",
-    date: "2023-08-21",
-    title: "Booking 1",
-    description: "Description for Booking 1",
-    mode: "Mode 1",
-    departure: "14 : 00 PM",
-    class: "Economy",
-    passengerId: "200056875020",
-  },
-  {
-    from: "Earth",
-    to: "Marse",
-    endDate: "2023-09-01",
-    date: "2023-08-19",
-    title: "Booking 1",
-    description: "Description for Booking 1",
-    mode: "Mode 1",
-    departure: "14 : 00 PM",
-    class: "Economy",
-    passengerId: "200056875020",
-  },
-  // ... other booking objects
-];
+import jwtDecode from "jwt-decode";
+import axios from "axios";
 
 const MyBookings = () => {
+  function formatTime(dateTimeString) {
+    const date = new Date(dateTimeString);
+    const hours = date.getUTCHours();
+    const minutes = date.getUTCMinutes();
+    const amPm = hours >= 12 ? "PM" : "AM";
+    const formattedHours = (hours % 12 === 0 ? 12 : hours % 12)
+      .toString()
+      .padStart(2, "0");
+    const formattedMinutes = minutes.toString().padStart(2, "0");
+    return `${formattedHours}:${formattedMinutes} ${amPm}`;
+  }
+
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  }
+
+  const token = localStorage.getItem("logintoken");
+  const decode = jwtDecode(token);
+  const userId = decode._id;
   const theme = useTheme();
   const today = new Date().toISOString().split("T")[0];
 
-  const sortedBookings = bookingsData.sort((a, b) =>
-    b.date.localeCompare(a.date)
-  );
+  const [bookings, setBookkings] = useState([]);
+  // const sortedBookings = bookings.sort((a, b) => b.date.localeCompare(a.date));
 
   //sortBookings(sortedBookings
   // const sortedBookings = bookingsData.sort((a, b) =>
@@ -71,6 +56,33 @@ const MyBookings = () => {
     }
   };
 
+  useEffect(() => {
+    const getBookingData = async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:4000/api/booking/user-bookings/${userId}`,
+          {}
+        );
+        setBookkings(res.data);
+        console.log(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getBookingData();
+  }, []);
+
+  const [img, setImg] = useState("");
+
+  const sendLink = async (boookingId) => {
+    const res = await axios.post("http://localhost:4000/api/qrcode/scan-qr", {
+      url: `http://127.0.0.1:5173/ticketDetails/${boookingId}`,
+    });
+    setImg(res.data);
+    console.log(res.data);
+  };
+
   return (
     <div>
       <SearchAppBar />
@@ -79,7 +91,7 @@ const MyBookings = () => {
       </HeaderContainer>
 
       <div>
-        {sortedBookings.map((booking, index) => (
+        {bookings.map((booking, index) => (
           <div key={index}>
             <Typography
               variant="h6"
@@ -89,7 +101,7 @@ const MyBookings = () => {
                 marginTop: "20px",
               }}
             >
-              {booking.date}
+              {formatDate(booking.createdAt)}
             </Typography>
 
             <Divider
@@ -143,7 +155,7 @@ const MyBookings = () => {
                       </Grid>
                       <Grid item>
                         <Typography component="div" variant="h6">
-                          {booking.from}
+                          {booking.trip_id.from.name}
                         </Typography>
                       </Grid>
                       <Grid item>
@@ -153,7 +165,7 @@ const MyBookings = () => {
                       </Grid>
                       <Grid item>
                         <Typography component="div" variant="h6">
-                          {booking.to}
+                          {booking.trip_id.to.name}
                         </Typography>
                       </Grid>
                     </Grid>
@@ -165,7 +177,7 @@ const MyBookings = () => {
                       </Grid>
                       <Grid item>
                         <Typography component="div">
-                          {booking.endDate}
+                          {formatDate(booking.trip_id.endDate)}
                         </Typography>
                       </Grid>
                     </Grid>
@@ -175,7 +187,9 @@ const MyBookings = () => {
                         <Typography component="div">Mode :</Typography>
                       </Grid>
                       <Grid item>
-                        <Typography component="div">{booking.mode}</Typography>
+                        <Typography component="div">
+                          {booking.trip_id.mode}
+                        </Typography>
                       </Grid>
                     </Grid>
                     {/* Departure */}
@@ -185,7 +199,7 @@ const MyBookings = () => {
                       </Grid>
                       <Grid item>
                         <Typography component="div">
-                          {booking.departure}
+                          {formatTime(booking.trip_id.departureTime)}
                         </Typography>
                       </Grid>
                     </Grid>
@@ -202,11 +216,6 @@ const MyBookings = () => {
                     <Grid container spacing={2} sx={{ marginTop: "" }}>
                       <Grid item>
                         <Typography component="div">Passenger Id :</Typography>
-                      </Grid>
-                      <Grid item>
-                        <Typography component="div">
-                          {booking.passengerId}
-                        </Typography>
                       </Grid>
                     </Grid>
                     <Typography
@@ -242,12 +251,20 @@ const MyBookings = () => {
                     >
                       E ticket
                     </Typography>
-                    <CardMedia
-                      component="img"
-                      sx={{ width: "150px", marginTop: "10px" }}
-                      image="../../images/qr_code_barcode.jpg"
-                      alt="Live from space album cover"
-                    />
+                    {img && (
+                      <a
+                        href={`http://127.0.0.1:5173/ticketDetails/${booking._id}`}
+                      >
+                        {" "}
+                        <CardMedia
+                          component="img"
+                          sx={{ width: "150px", marginTop: "10px" }}
+                          image={img}
+                          alt="Live from space album cover"
+                        />
+                      </a>
+                    )}
+
                     <Typography
                       sx={{
                         display: "flex",
@@ -281,8 +298,12 @@ const MyBookings = () => {
                       marginBottom: "20px",
                     }}
                   >
-                    <BootstrapButton variant="" disableRipple>
-                      Cancel
+                    <BootstrapButton
+                      onClick={() => sendLink(booking._id)}
+                      variant=""
+                      disableRipple
+                    >
+                      Generate QR
                     </BootstrapButton>
                   </Box>
                 </Box>

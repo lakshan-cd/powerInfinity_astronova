@@ -95,11 +95,11 @@ const BookingForm = () => {
 
   // console.log(totalCost);
   // price
-  if (flightClass == "Business Class") {
+  if (flightClass == "BUISNESS CLASS") {
     totalCost = totalCost + 3000 * selectedPassengers.length;
-  } else if (flightClass == "First Class") {
+  } else if (flightClass == "FIRST CLASS") {
     totalCost = totalCost + 2000 * selectedPassengers.length;
-  } else if (flightClass == "Economy Class") {
+  } else if (flightClass == "ECONOMY CLASS") {
     totalCost = totalCost + 1000 * selectedPassengers.length;
   }
 
@@ -215,9 +215,9 @@ const BookingForm = () => {
                   borderRadius: "10px",
                 }}
               >
-                <MenuItem value={"Business Class"}>Business Class</MenuItem>
-                <MenuItem value={"First Class"}>First Class</MenuItem>
-                <MenuItem value={"Economy Class"}>Economy</MenuItem>
+                <MenuItem value={"BUISNESS CLASS"}>Business Class</MenuItem>
+                <MenuItem value={"FIRST CLASS"}>First Class</MenuItem>
+                <MenuItem value={"ECONOMY CLASS"}>Economy</MenuItem>
               </Select>
             </FormControl>
           </Grid>
