@@ -73,6 +73,7 @@ const BookingForm = () => {
   useEffect(() => {
     console.log("data from timetable", queryParams);
   }, [queryParams]);
+
   return (
     <div>
       <div>
@@ -216,10 +217,10 @@ const BookingForm = () => {
       <Stack spacing={3} direction="row">
         {/* <ColorButton variant="contained">Custom CSS</ColorButton> */}
         <BootstrapButton variant="" disableRipple>
-          Cancel
+          Cancell
         </BootstrapButton>
-        <BootstrapButton variant="" disableRipple>
-          Next
+        <BootstrapButton onClick={payment} variant="" disableRipple>
+          Pay Now
         </BootstrapButton>
       </Stack>
     </div>
