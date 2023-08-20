@@ -15,6 +15,7 @@ import {
 } from "./SignUpComponent/Style";
 import AppBar from "@mui/material/AppBar";
 import { Link, useNavigate } from "react-router-dom";
+import jwtDecode from "jwt-decode";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -66,6 +67,10 @@ const StyledLogin = styled(Button)(({ theme }) => ({
 export default function SearchAppBar() {
 
 const navigate = useNavigate()
+const token = localStorage.getItem('logintoken')
+const decode = jwtDecode(token)
+console.log(decode)
+
 const login = () =>{
   navigate('/signin')
 }
@@ -129,11 +134,12 @@ const login = () =>{
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          {!token && <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <Button></Button>
             <StyledLogin onClick={login}>Login</StyledLogin>
             <StyledAdd onClick={navigateToSignup}>Register</StyledAdd>
-          </Box>
+          </Box> }
+          
         </Toolbar>
       </AppBar>
     </Box>
