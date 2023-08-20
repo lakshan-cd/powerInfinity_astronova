@@ -17,20 +17,19 @@ import Logout from "./Pages/login/logout";
 
 function App() {
   return (
-    
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/signin" element={<Login />} />
         <Route path="/Signup" element={<Signup />} />
-        <Route path="/resetpassword/:id" element={<ResetPassword/>} />
+        <Route path="/resetpassword/:id" element={<ResetPassword />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/resetpassword" element={<ResetPassword />} />
         <Route path="/addreservation" element={<BookingForm />} />
         <Route path="/tripSchedule" element={<TripSchedule />} />
         <Route path="/AboutUs" element={<AboutUs />} />
         <Route path="/mybookings" element={<MyBookings />} />
-        <Route path= "/signout" element={<Logout/>} />
+        <Route path="/signout" element={<Logout />} />
       </Routes>
     </BrowserRouter>
   );
