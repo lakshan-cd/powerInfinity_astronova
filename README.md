@@ -2,6 +2,7 @@
 
 Welcome to Astronova! This repository contains the code for the Astronova project. Astronova is a web application built using ReactJS, Node.js, Express, and MongoDB. It allows users to explore the cosmos and engage with space-related content.
 
+MongoDB dump link : mongodump --uri mongodb+srv://lenzz:Astronova@cluster0.wff0qit.mongodb.net/Astronova
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
