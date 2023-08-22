@@ -8,8 +8,13 @@ import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
-import { StyledAdd, SearchIconWrapper } from "./Style";
+import {
+  StyledAdd,
+  SearchIconWrapper,
+  CustomLink,
+} from "./SignUpComponent/Style";
 import AppBar from "@mui/material/AppBar";
+<<<<<<< HEAD
 import { Link } from "react-router-dom"; 
 
 const StyledTypography = styled(Typography)(({ theme }) => ({
@@ -22,6 +27,10 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
     color: theme.palette.primary.main, // Change color on hover
   },
 }));
+=======
+import { Link, useNavigate } from "react-router-dom";
+import jwtDecode from "jwt-decode";
+>>>>>>> main
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -71,6 +80,18 @@ const StyledLogin = styled(Button)(({ theme }) => ({
 }));
 
 export default function SearchAppBar() {
+
+const navigate = useNavigate()
+const token = localStorage.getItem('logintoken')
+
+const login = () =>{
+  navigate('/signin')
+}
+  const history = useNavigate();
+
+  const navigateToSignup = () => {
+    history("/Signup"); // Navigate to the signup page
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: "black" }}>
@@ -104,8 +125,7 @@ export default function SearchAppBar() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            
-            Book Now
+            <CustomLink to="/tripSchedule">Book Now</CustomLink>
           </Typography>
           <Typography
             variant="h6"
@@ -113,7 +133,7 @@ export default function SearchAppBar() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            My Bookings{" "}
+            <CustomLink to="/mybookings">My Bookings </CustomLink>
           </Typography>
           <Typography
             variant="h6"
@@ -121,7 +141,7 @@ export default function SearchAppBar() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            About Us{" "}
+            <CustomLink to="/AboutUs">About Us</CustomLink>
           </Typography>
           <Search>
             <SearchIconWrapper>
@@ -132,11 +152,12 @@ export default function SearchAppBar() {
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          {!token && <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <Button></Button>
-            <StyledLogin>Login</StyledLogin>
-            <StyledAdd>Register</StyledAdd>
-          </Box>
+            <StyledLogin onClick={login}>Login</StyledLogin>
+            <StyledAdd onClick={navigateToSignup}>Register</StyledAdd>
+          </Box> }
+          
         </Toolbar>
       </AppBar>
     </Box>

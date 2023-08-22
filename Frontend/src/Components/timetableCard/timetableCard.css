@@ -1,0 +1,18 @@
+.timetable-card {
+  background-color: rgba(255, 255, 255, 0.04);
+  border-radius: 10px;
+  color: white;
+  margin-top: 10px;
+  border: 1px solid #cc9200;
+  margin-bottom: 4px;
+  padding: 4px;
+  transition: all ease-in 0.15s ;
+  
+}
+.timetable-card:hover{
+    cursor: pointer;
+  background-color: rgba(255, 247, 5, 0.09);
+
+}
+
+

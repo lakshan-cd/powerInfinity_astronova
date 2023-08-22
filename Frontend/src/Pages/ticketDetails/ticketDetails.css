@@ -1,0 +1,59 @@
+.ticketPage{
+     color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-image: url('../../../images/back.png'); /* Replace with the actual path to your image */
+  background-size: cover; /* Adjust to your image sizing preference */
+  background-repeat: no-repeat; /* Prevent image repetition */
+  background-attachment: fixed; /* Optional: Fix the background image */
+  height: 100vh;
+  
+
+}
+
+.ticketContainer{
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+
+
+}
+
+.ticketCard{
+    border: 1px solid #cc9200;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 5%;
+}
+
+.ticketDetails{
+    font-size: 24px;
+    text-align: center;
+    font-weight: 700;
+    color: #cc9200;
+}
+
+.tripDetailsSubTopic{
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    color: #cc9200;
+}
+.tripDetailsFlexContainer{
+    display: flex;
+    font-size: 18px;
+    justify-content: center;
+}
+
+.tripDetailsItem{
+    display: flex;
+    margin: 0px 10px ;
+}
+
+.tripDetailsItemKey{
+    font-weight: 700;
+
+}
+
+.tripDetailsItemValue{
+    margin-left: 5px;
+}

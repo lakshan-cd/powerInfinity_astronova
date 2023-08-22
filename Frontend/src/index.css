@@ -5,7 +5,10 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-image: url('images/back.png'); /* Replace with the actual path to your image */
+  background-size: cover; /* Adjust to your image sizing preference */
+  background-repeat: no-repeat; /* Prevent image repetition */
+  background-attachment: fixed; /* Optional: Fix the background image */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
