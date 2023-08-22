@@ -5,7 +5,7 @@ const { SelectClass } = require("../utils/Constants");
 
 const bookingSchema = new Schema(
   {
-    trip_id: {
+    trip: {
       type: Schema.Types.ObjectId,
       ref: "Trip",
     },
@@ -17,25 +17,9 @@ const bookingSchema = new Schema(
         SelectClass.EconomyClass,
       ],
     },
-    // from the Astronova system
-    user_id: {
-      type: String,
-    },
-    // from the stripe
-    customer_id: {
-      type: String,
-    },
-    passsenger_ids: {
-      type: [String],
-    },
-    total_payment: {
-      type: Number,
-    },
-    payment_status: {
-      type: String,
-    },
-    payment_intent: {
-      type: String,
+    BookingDate: {
+      type: Date,
+      required: true,
     },
   },
   { timestamps: true }
